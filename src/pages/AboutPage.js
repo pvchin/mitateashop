@@ -1,6 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { AspectRatio, Box, Container, Heading } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Box,
+  Container,
+  Grid,
+  GridItem,
+  Heading,
+} from "@chakra-ui/react";
 import { PageHero } from "../components";
 import aboutImg from "../assets/mitadininggroup.jpg";
 
@@ -9,16 +16,15 @@ const AboutPage = () => {
     <main>
       <PageHero title="about" />
       <Wrapper className="page section section-center">
-        <Box p={4}>
         <AspectRatio maxW="500px" ratio={1}>
           <img src={aboutImg} alt="about" />
         </AspectRatio>
-        </Box>
+
         <article>
           <Box p={6}>
             <Heading size="lg">our story</Heading>
-            
           </Box>
+
           <Container>
             Founded in 1993, the Mita Dining Group has ten chain brands in such
             industries as Italian dining, leisure tea houses, Japanese hot pots,
