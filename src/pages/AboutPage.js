@@ -9,9 +9,11 @@ const AboutPage = () => {
     <main>
       <PageHero title="about" />
       <Wrapper className="page section section-center">
+        <Box p={4}>
         <AspectRatio maxW="500px" ratio={1}>
           <img src={aboutImg} alt="about" />
         </AspectRatio>
+        </Box>
         <article>
           <Box p={6}>
             <Heading size="lg">our story</Heading>
