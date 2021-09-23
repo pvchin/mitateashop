@@ -29,19 +29,23 @@ const Services = () => {
       </article>
       <div className="services-center">
         <article className="service">
-          <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+          <Grid
+            templateColumns={{ base:"repeat(1, 1fr)", sm:"repeat(1, 1fr)", md:"repeat(3, 1fr)"}}
+            gap={2}
+    
+          >
             <Box>
-              <AspectRatio maxW="500px" ratio={4 / 3}>
+              <AspectRatio maxW="400px" ratio={4 / 3}>
                 <Image src={logo1} alt="ground" boxSize="100px" />
               </AspectRatio>
             </Box>
             <Box>
-              <AspectRatio maxW="500px" ratio={4 / 3}>
+              <AspectRatio maxW="400px" ratio={4 / 3}>
                 <Image src={logo2} alt="upper" boxSize="100px" />
               </AspectRatio>
             </Box>
             <Box>
-              <AspectRatio maxW="500px" ratio={4 / 3}>
+              <AspectRatio maxW="400px" ratio={4 / 3}>
                 <Image src={logo3} alt="slogan" boxSize="100px" />
               </AspectRatio>
             </Box>
