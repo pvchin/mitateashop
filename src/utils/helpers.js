@@ -2,7 +2,7 @@ export const formatPrice = (number) => {
   const newNumber = Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  }).format(number / 100);
+  }).format(number);
   return newNumber;
 };
 
@@ -13,3 +13,20 @@ export const getUniqueValues = (data, type) => {
   }
   return ["all", ...new Set(unique)];
 };
+
+// export function formatPrice(cents) {
+//   if (!cents) return null;
+
+//   return cents.toLocaleString("en-US", {
+//     style: "currency",
+//     currency: "USD",
+//   });
+// }
+export function formatPriceZero(cents) {
+  //if (!cents) return null;
+
+  return cents.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+}

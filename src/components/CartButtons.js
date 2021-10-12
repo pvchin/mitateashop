@@ -1,15 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import {
+  Box,
+  Button,
+  Divider,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
+import { useCarts } from "./react-query/carts/useCarts";
+import { useAuthUser } from "./react-query/auth/useAuthUser"
+import Signin from "./Signin"
 
 const CartButtons = () => {
+  const history = useHistory()
+  const { carts } = useCarts();
+  const { authuser, updateAuthUser, clearAuthUser} = useAuthUser()
   const { closeSidebar } = useProductsContext();
   const { total_items } = useCartContext();
-  const { loginWithRedirect, myUser, logout } = useUserContext();
+  //const { loginWithRedirect, myUser, logout } = useUserContext();
+  const [totalitems, setTotalItems] = useState(0);
+  const [isLoad, setIsLoad] = useState(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log("totalitems", totalitems);
+  console.log("authuser", authuser ? authuser : "none")
+  console.log("authuser length", authuser ? authuser.length : 0)
+
+  useEffect(() => {
+    if (carts) {
+      setTotalItems(carts.length);
+      setIsLoad(false);
+    }
+  }, [isLoad]);
+
+  const handleSignin = () => {
+    history.push("/signin")
+  }
+
+  const handleLogOut = () => {
+    clearAuthUser()
+    history.push("/")
+  }
 
   return (
     <Wrapper className="cart-btn-wrapper">
@@ -17,22 +59,47 @@ const CartButtons = () => {
         Cart
         <span className="cart-container">
           <FaShoppingCart />
-          <span className="cart-value">{total_items}</span>
+          <span className="cart-value">{totalitems}</span>
         </span>
       </Link>
-      {myUser ? (
+      {authuser && authuser.length > 0 ? (
         <button
           type="button"
           className="auth-btn"
-          onClick={() => logout({ returnTo: window.location.origin })}
+          onClick={handleLogOut}
         >
           Logout <FaUserMinus />
         </button>
       ) : (
-        <button type="button" className="auth-btn" onClick={loginWithRedirect}>
+        <button type="button" className="auth-btn" onClick={handleSignin}>
           Login <FaUserPlus />
         </button>
       )}
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Box align="center">
+              <Text fontFamily="cursive" fontSize="25">
+                Sign In
+              </Text>
+            </Box>
+          </ModalHeader>
+          <Divider borderColor="blue" border="1px" />
+          <ModalCloseButton />
+          <ModalBody>
+            <Box w="100%">
+              <Signin />
+            </Box>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Wrapper>
   );
 };

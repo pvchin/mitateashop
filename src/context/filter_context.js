@@ -10,13 +10,14 @@ import {
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
 } from "../actions";
-import { useProductsContext } from "./products_context";
+//import { useProductsContext } from "./products_context";
+import { useItems } from "../components/react-query/items/useItems";
 
 const initialState = {
   filtered_products: [],
   all_products: [],
   grid_view: true,
-  sort: "price-lowest",
+  sort: "name-a",
   filters: {
     text: "",
     company: "all",
@@ -32,7 +33,8 @@ const initialState = {
 const FilterContext = React.createContext();
 
 export const FilterProvider = ({ children }) => {
-  const { products } = useProductsContext();
+  //const { products } = useProductsContext();
+  const { items: products } = useItems();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {

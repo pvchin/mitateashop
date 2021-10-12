@@ -1,14 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { Heading} from "@chakra-ui/react"
 
 const CartColumns = () => {
   return (
     <Wrapper>
       <div className="content">
-        <h5>item</h5>
-        <h5>price</h5>
-        <h5>quantity</h5>
-        <h5>subtotal</h5>
+        <Heading as="h4" size="md">
+          item
+        </Heading>
+        <Heading as="h4" size="md">
+          price
+        </Heading>
+        <Heading as="h4" size="md">
+          quantity
+        </Heading>
+        <Heading as="h4" size="md">
+          subtotal
+        </Heading>
         <span></span>
       </div>
       <hr />

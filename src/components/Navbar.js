@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../assets/MitaLogo.jpg";
-import { AspectRatio, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../utils/constants";

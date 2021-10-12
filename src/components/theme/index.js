@@ -1,4 +1,4 @@
-import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
+import { extendTheme, withDefaultColorScheme, withDefaultVariant } from "@chakra-ui/react";
 
 // const config = {
 //   initialColorMode: "light",
@@ -36,5 +36,6 @@ export const theme = extendTheme({
       900: "#051005",
     },
   },
-  //withDefaultColorScheme({ colorScheme: "brand" }),
+  // withDefaultColorScheme({ colorScheme: "olive", components: ['Checkbox'] }),
+  // withDefaultVariant({ variant: "filled", components:['Input', 'Select']})
 });

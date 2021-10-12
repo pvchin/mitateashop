@@ -16,6 +16,7 @@ import Sort from "./Sort";
 import Stars from "./Stars";
 import CartContent from "./CartContent";
 import PageHero from "./PageHero";
+import UserOrdersHistory  from "./UserOrdersHistory";
 
 export {
   FeaturedProducts,
@@ -36,4 +37,5 @@ export {
   Stars,
   CartContent,
   PageHero,
+  UserOrdersHistory,
 };

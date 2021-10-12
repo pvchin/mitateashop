@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 // import { useUserContext } from "../context/user_context";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuthUser } from "../components/react-query/auth/useAuthUser";
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const { user } = useAuth0();
+  const { authuser } = useAuthUser()
 
   return (
     <Route
       {...rest}
       render={() => {
-        return user ? children : <Redirect to="/"></Redirect>;
+        return authuser && authuser.length > 0 ? children : <Redirect to="/"></Redirect>;
       }}
     ></Route>
   );

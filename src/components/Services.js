@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import logo1 from "../assets/ground.jpeg";
 import logo2 from "../assets/upperfloor.jpeg";
-import logo3 from "../assets/slogan.jpeg";
+import logo3 from "../assets/cart.jpeg";
 import { services } from "../utils/constants";
 
 const Services = () => {

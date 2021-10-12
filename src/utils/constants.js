@@ -1,5 +1,20 @@
 import React from "react";
 import { GiCompass, GiDiamondHard, GiStabbedNote } from "react-icons/gi";
+export const items_url = "/api/items";
+export const users_url = "/api/users";
+export const toppings_url = "/api/toppings";
+export const orders_url = "/api/orders";
+export const orderitems_url = "/api/orderitems";
+export const orderaddon_url = "/api/orderaddon";
+export const areas_url = "/api/areas";
+export const deliveryperiod_url = "/api/deliveryperiod";
+export const document_url = "/api/document";
+export const images_url =
+  "https://res.cloudinary.com/dlmzwvakr/image/upload/v1632574354/mitaphotos/";
+export const authuser_localstorage_key = "mita_authuser";
+export const user_localstorage_key = "mita_user";
+export const carts_localstorage_key = "mita_mcarts";
+
 export const links = [
   {
     id: 1,
@@ -15,6 +30,16 @@ export const links = [
     id: 3,
     text: "products",
     url: "/products",
+  },
+  {
+    id: 3,
+    text: "orders",
+    url: "/userorders",
+  },
+  {
+    id: 4,
+    text: "admin",
+    url: "/admin",
   },
 ];
 
@@ -45,7 +70,8 @@ export const single_product_url = `https://course-api.com/react-store-single-pro
 
 export const products = [
   {
-    id: "m001",
+    id: "001",
+    itemno: "m001",
     name: "Brown Sugar Bubble Fresh Milk",
     price: 390,
     image: "./products/product1.jpg",
@@ -57,7 +83,8 @@ export const products = [
     featured: true,
   },
   {
-    id: "m002",
+    id: "002",
+    itemno: "m002",
     name: "Brown Sugar White Gourd Tea",
     price: 390,
     image: "./products/product2.jpg",
@@ -70,7 +97,8 @@ export const products = [
   },
 
   {
-    id: "m003",
+    id: "003",
+    itemno: "m003",
     name: "Fresh Fruit Ice Tea",
     price: 390,
     image: "./products/product4.jpg",
@@ -82,7 +110,8 @@ export const products = [
     featured: true,
   },
   {
-    id: "m004",
+    id: "004",
+    itemno: "m004",
     name: "Lemon Green Tea",
     price: 3.9,
     image: "./products/product3.jpg",

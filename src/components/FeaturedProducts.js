@@ -1,26 +1,17 @@
 import React from "react";
 import { useProductsContext } from "../context/products_context";
 import { Link } from "react-router-dom";
-import { Heading} from "@chakra-ui/react"
+import { Heading } from "@chakra-ui/react";
 import styled from "styled-components";
 import Error from "./Error";
 import Loading from "./Loading";
-import Product from "./Product";
-import { products} from "../utils/constants"
-
+import FeaturedProduct from "./FeaturedProduct";
+import { useItems } from "./react-query/items/useItems";
 
 const FeaturedProducts = () => {
-  const {
-    products_loading: loading,
-    products_error: error,
-    featured_products: featured,
-  } = useProductsContext();
-  if (loading) {
-    return <Loading />;
-  }
-  if (error) {
-    return <Error />;
-  }
+  const { items } = useItems();
+  const { featured_products: featured } = useProductsContext();
+
   return (
     <Wrapper className="section">
       <div className="title">
@@ -28,8 +19,8 @@ const FeaturedProducts = () => {
         <div className="underline"></div>
       </div>
       <div className="section-center featured">
-        {products.slice(0, 3).map((product) => {
-          return <Product key={product.id} {...product} />;
+        {items.slice(0, 3).map((product) => {
+          return <FeaturedProduct key={product.id} {...product} />;
         })}
       </div>
       <Link to="/products" className="btn">
@@ -42,11 +33,11 @@ const FeaturedProducts = () => {
 const Wrapper = styled.section`
   background: var(--clr-grey-10);
   .featured {
-    margin: 4rem auto;
+    margin: 2rem auto;
     display: grid;
     gap: 2.5rem;
     img {
-      height: 325px;
+      height: 300px;
     }
   }
   .btn {

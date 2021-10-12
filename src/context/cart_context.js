@@ -9,9 +9,9 @@ import {
 } from "../actions";
 
 const getLocalStorage = () => {
-  let cart = localStorage.getItem("cart");
+  let cart = localStorage.getItem("mcarts");
   if (cart) {
-    return JSON.parse(localStorage.getItem("cart"));
+    return JSON.parse(localStorage.getItem("mcarts"));
   } else {
     return [];
   }

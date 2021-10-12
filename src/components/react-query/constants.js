@@ -1,0 +1,15 @@
+export const queryKeys = {
+    items: "items",
+    toppings: "toppings",
+    orders: "orders",
+    orderitems: "orderitems",
+    orderaddon: "orderaddon",
+    singleorder: "singleorder",
+    users: "users",
+    carts: "carts",
+    document: "document",
+    auth: "auth",
+    authuser: "authuser",
+    areas: "areas",
+    deliveryperiod: "deliveryperiod",
+};

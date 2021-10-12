@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Heading } from "@chakra-ui/react"
 import heroBcg from "../assets/intro5.jpeg"
-import heroBcg2 from "../assets/intro3.jpeg";
+import heroBcg2 from "../assets/slogan.jpg";
 
 const Hero = () => {
   return (

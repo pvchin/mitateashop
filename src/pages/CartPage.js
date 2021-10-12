@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { createLocalStorageStateHook } from "use-local-storage-state";
 import { useCartContext } from "../context/cart_context";
 import { Link } from "react-router-dom";
 import { CartContent, PageHero } from "../components";
+import { images_url, carts_localstorage_key } from "../utils/constants";
 
 const CartPage = () => {
-  const { cart } = useCartContext();
-  if (cart.length < 1) {
+ const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
+ const [mcarts, setMCarts] = useMCarts();
+  if (!mcarts || mcarts.length < 1) {
     return (
       <Wrapper className="page-100">
         <div className="empty">
