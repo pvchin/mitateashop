@@ -3,8 +3,8 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import { createLocalStorageStateHook } from "use-local-storage-state";
 import { useRecoilState } from "recoil";
-import { orderState } from "./data/atomdata";
-import { currentorderState } from "./data/atomdata";
+import { orderState } from "../data/atomdata";
+import { currentorderState } from "../data/atomdata";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { carts_localstorage_key } from "../utils/constants";
@@ -22,16 +22,16 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import { useDocument } from "./react-query/document/useDocument";
-import { useUpdateDocument } from "./react-query/document/useUpdateDocument";
-import { useOrders } from "./react-query/orders/useOrders";
-import { useAddOrders } from "./react-query/orders/useCreateOrders";
-import { useOrderItems } from "./react-query/orderitems/useOrderItems";
-import { useAddOrderItems } from "./react-query/orderitems/useCreateOrderItems";
-import { useOrderAddon } from "./react-query/orderaddon/useOrderAddon";
-import { useAddOrderAddon } from "./react-query/orderaddon/useCreateOrderAddon";
-import { useAuthUser } from "./react-query/auth/useAuthUser";
-import { useUsers } from "./react-query/users/useUsers";
+import { useDocument } from "../react-query/document/useDocument";
+import { useUpdateDocument } from "../react-query/document/useUpdateDocument";
+import { useOrders } from "../react-query/orders/useOrders";
+import { useAddOrders } from "../react-query/orders/useCreateOrders";
+import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+import { useAddOrderItems } from "../react-query/orderitems/useCreateOrderItems";
+import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
+import { useAddOrderAddon } from "../react-query/orderaddon/useCreateOrderAddon";
+import { useAuthUser } from "../react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
 
 const initial_authuser = [
   {

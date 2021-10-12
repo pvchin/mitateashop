@@ -18,12 +18,12 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
-import { useCustomToast } from "./helpers/useCustomToast";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { Redirect } from "react-router-dom";
-import { useUsers } from "./react-query/users/useUsers";
-import { useAreas } from "./react-query/area/useAreas";
-import { useUpdateUser } from "./react-query/users/useUpdateUser";
-import { useAuthUser } from "./react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
+import { useAreas } from "../react-query/area/useAreas";
+import { useUpdateUser } from "../react-query/users/useUpdateUser";
+import { useAuthUser } from "../react-query/auth/useAuthUser";
 
 const initial_values = {
   name: "",

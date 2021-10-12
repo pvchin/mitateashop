@@ -16,8 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
-import { useUsers } from "./react-query/users/useUsers";
-import { useUpdateUser } from "./react-query/users/useUpdateUser";
+import { useUsers } from "../react-query/users/useUsers";
+import { useUpdateUser } from "../react-query/users/useUpdateUser";
 import { user_localstorage_key } from "../utils/constants";
 
 const initial_values = {

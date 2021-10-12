@@ -18,10 +18,10 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { authuser_localstorage_key } from "../utils/constants";
-import { useCustomToast } from "./helpers/useCustomToast";
-import { useAuthUser } from "./react-query/auth/useAuthUser";
-import { useUsers } from "./react-query/users/useUsers";
-import { useCreateUser } from "./react-query/users/useCreateUser";
+import { useCustomToast } from "../helpers/useCustomToast";
+import { useAuthUser } from "../react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
+import { useCreateUser } from "../react-query/users/useCreateUser";
 import { firebase_auth } from "../utils/firebase";
 
 const INITIAL_STATE = {

@@ -19,8 +19,8 @@ import {
 import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
-import { useCarts } from "./react-query/carts/useCarts";
-import { useAuthUser } from "./react-query/auth/useAuthUser"
+import { useCarts } from "../react-query/carts/useCarts";
+import { useAuthUser } from "../react-query/auth/useAuthUser"
 import Signin from "./Signin"
 
 const CartButtons = () => {

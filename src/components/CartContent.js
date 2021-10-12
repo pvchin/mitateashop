@@ -5,7 +5,7 @@ import { createLocalStorageStateHook } from "use-local-storage-state";
 import { useCartContext } from "../context/cart_context";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { orderItemState } from "./data/atomdata";
+import { orderItemState } from "../data/atomdata";
 import CartColumns from "./CartColumns";
 import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";

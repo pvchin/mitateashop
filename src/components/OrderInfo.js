@@ -56,11 +56,11 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import { currentorderState } from "./data/atomdata";
-import { useCustomToast } from "./helpers/useCustomToast";
-import { useAreas } from "./react-query/area/useAreas";
-import { useDeliveryPeriod } from "./react-query/deliveryperiod/useDeliveryPeriod";
-import { useOrders } from "./react-query/orders/useOrders";
+import { currentorderState } from "../data/atomdata";
+import { useCustomToast } from "../helpers/useCustomToast";
+import { useAreas } from "../react-query/area/useAreas";
+import { useDeliveryPeriod } from "../react-query/deliveryperiod/useDeliveryPeriod";
+import { useOrders } from "../react-query/orders/useOrders";
 
 const initial_order = [
   {

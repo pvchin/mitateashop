@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Error from "./Error";
 import Loading from "./Loading";
 import FeaturedProduct from "./FeaturedProduct";
-import { useItems } from "./react-query/items/useItems";
+import { useItems } from "../react-query/items/useItems";
 
 const FeaturedProducts = () => {
   const { items } = useItems();

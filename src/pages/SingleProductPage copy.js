@@ -15,7 +15,7 @@ import {
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { images_url } from "../utils/constants";
-import { useItems } from "../components/react-query/items/useItems";
+import { useItems } from "../react-query/items/useItems";
 
 const SingleProductPage = () => {
   const { id } = useParams();

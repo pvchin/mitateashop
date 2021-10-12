@@ -37,14 +37,14 @@ import {
   TabPanel,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useCustomToast } from "./helpers/useCustomToast";
-import { useOrders } from "./react-query/orders/useOrders";
-import { useSingleOrder } from "./react-query/orders/useSingleOrder";
-import { useOrderItems } from "./react-query/orderitems/useOrderItems";
-import { useOrderAddon } from "./react-query/orderaddon/useOrderAddon";
-import { useUpdateOrders } from "./react-query/orders/useUpdateOrders";
+import { useCustomToast } from "../helpers/useCustomToast";
+import { useOrders } from "../react-query/orders/useOrders";
+import { useSingleOrder } from "../react-query/orders/useSingleOrder";
+import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
+import { useUpdateOrders } from "../react-query/orders/useUpdateOrders";
 import { useUserContext } from "../context/user_context";
-import { AlertDialogBox } from "../components/helpers/AlertDialogBox";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import OrderDetails from "../components/OrderDetails";
 import OrderInfoView from "../components/OrderInfoView";
 import OrderDelivery from "../components/OrderDelivery";
@@ -301,7 +301,7 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
                     options={{
                       filtering: false,
                       search: false,
-                      toolbar: true,
+                      toolbar: false,
                       headerStyle: {
                         backgroundColor: "#9AE6B4",
                         color: "black",

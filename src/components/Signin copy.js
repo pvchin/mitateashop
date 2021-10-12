@@ -14,8 +14,8 @@ import {
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 
-import { useAuth } from "./react-query/auth/useAuthUser";
-import { useUsers } from "./react-query/users/useUsers";
+import { useAuth } from "../react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
 
 // eslint-disable-next-line max-lines-per-function
 const Signin = () => {

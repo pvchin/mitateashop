@@ -11,7 +11,7 @@ import {
   CLEAR_FILTERS,
 } from "../actions";
 //import { useProductsContext } from "./products_context";
-import { useItems } from "../components/react-query/items/useItems";
+import { useItems } from "../react-query/items/useItems";
 
 const initialState = {
   filtered_products: [],

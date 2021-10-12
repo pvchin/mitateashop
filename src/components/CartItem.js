@@ -17,7 +17,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { carts_localstorage_key } from "../utils/constants";
-import { AlertDialogBox } from "./helpers/AlertDialogBox";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { formatPrice } from "../utils/helpers";
 import AmountButtons from "./AmountButtons";
 import { FaTrash } from "react-icons/fa";

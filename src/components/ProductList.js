@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { useFilterContext } from "../context/filter_context";
 import GridView from "./GridView";
 import ListView from "./ListView";
-import { useItems } from "./react-query/items/useItems";
+import { useItems } from "../react-query/items/useItems";
 
 
 const ProductList = () => {

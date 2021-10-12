@@ -62,20 +62,20 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import { useCustomToast } from "../components/helpers/useCustomToast";
-import { AlertDialogBox } from "../components/helpers/AlertDialogBox";
-import { orderState } from "../components/data/atomdata";
+import { useCustomToast } from "../helpers/useCustomToast";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
+import { orderState } from "../data/atomdata";
 import { formatPrice } from "../utils/helpers";
 import { PageHero } from "../components";
 import OrderDetails from "../components/OrderDetails";
 import OrderInfo from "../components/OrderInfo";
-import { useAuthUser } from "../components/react-query/auth/useAuthUser";
-import { useUsers } from "../components/react-query/users/useUsers";
+import { useAuthUser } from "../react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
 //import { useSingleOrder } from "../components/react-query/orders/useSingleOrder";
-import { useOrderItems } from "../components/react-query/orderitems/useOrderItems";
-import { useOrderAddon } from "../components/react-query/orderaddon/useOrderAddon";
-import { useUpdateOrders } from "../components/react-query/orders/useUpdateOrders";
-import { useAreas } from "../components/react-query/area/useAreas";
+import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
+import { useUpdateOrders } from "../react-query/orders/useUpdateOrders";
+import { useAreas } from "../react-query/area/useAreas";
 
 const CheckoutPage = () => {
   const toast = useCustomToast();

@@ -39,19 +39,23 @@ import {
   TabPanel,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useCustomToast } from "./helpers/useCustomToast";
-import { useOrders } from "./react-query/orders/useOrders";
-import { useSingleOrder } from "./react-query/orders/useSingleOrder";
-import { useOrderItems } from "./react-query/orderitems/useOrderItems";
-import { useOrderAddon } from "./react-query/orderaddon/useOrderAddon";
-import { useUpdateOrders } from "./react-query/orders/useUpdateOrders";
+import { useCustomToast } from "../helpers/useCustomToast";
+import { useOrders } from "../react-query/orders/useOrders";
+import { useSingleOrder } from "../react-query/orders/useSingleOrder";
+import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
+import { useUpdateOrders } from "../react-query/orders/useUpdateOrders";
 import { useUserContext } from "../context/user_context";
-import { AlertDialogBox } from "../components/helpers/AlertDialogBox";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import OrderDetails from "../components/OrderDetails";
 import OrderInfoView from "../components/OrderInfoView";
 import OrderDelivery from "../components/OrderDelivery";
 import OrderDelete from "./OrderDelete";
 import AdminOrdersHistory from "./AdminOrdersHistory";
+import ItemsTable from "./ItemsTable";
+import AreasTable from "./AreasTable";
+import DeliveryPeriodTable from "./DeliveryPeriodTable";
+import ToppingsTable from "./ToppingsTable";
 
 const confirm_columns = [
   {
@@ -163,16 +167,20 @@ const AdminMain = () => {
             <Heading size="lg">Admin</Heading>
           </Box> */}
           <Box align="center" w={{ base: "auto", md: "300vh" }}>
-            <Tabs align="center" isLazy>
+            <Tabs align="center" defaultIndex={1} isLazy>
               <TabList>
                 <Tab>Items</Tab>
                 <Tab>Orders</Tab>
-                <Tab>Tables</Tab>
+                <Tab>Areas</Tab>
+                <Tab>Delivery Period</Tab>
+                <Tab>Toppings</Tab>
               </TabList>
 
               <TabPanels>
                 <TabPanel>
-                  <Box w="80%"></Box>
+                  <Box w="80%">
+                    <ItemsTable />
+                  </Box>
                 </TabPanel>
                 <TabPanel>
                   <Box w="80%">
@@ -180,7 +188,19 @@ const AdminMain = () => {
                   </Box>
                 </TabPanel>
                 <TabPanel>
-                  <Box w="80%"></Box>
+                  <Box w="80%">
+                    <AreasTable />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <DeliveryPeriodTable />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <ToppingsTable />
+                  </Box>
                 </TabPanel>
               </TabPanels>
             </Tabs>

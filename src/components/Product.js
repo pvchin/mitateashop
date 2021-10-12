@@ -15,11 +15,11 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import { orderItemState } from "./data/atomdata";
+import { orderItemState } from "../data/atomdata";
 import { images_url } from "../utils/constants";
-import { useOrderItems } from "./react-query/orderitems/useOrderItems";
-import { useAddOrderItems } from "./react-query/orderitems/useCreateOrderItems";
-import { useUpdateOrderItems } from "./react-query/orderitems/useUpdateOrderItems";
+import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+import { useAddOrderItems } from "../react-query/orderitems/useCreateOrderItems";
+import { useUpdateOrderItems } from "../react-query/orderitems/useUpdateOrderItems";
 
 const Product = ({ id, image, name, price, mprice, lprice, size }) => {
   const history = useHistory();
@@ -47,10 +47,13 @@ const Product = ({ id, image, name, price, mprice, lprice, size }) => {
   return (
     <Wrapper>
       <Container>
-        <Box boxSize="280" h="300px">
-          <AspectRatio maxW="280px" ratio={1}>
-            <Wrap px="1rem" spacing={4} justify="center">
+        <Box boxSize="300" h="300px">
+          {/* <AspectRatio maxW="280px" ratio={1}> */}
+          <AspectRatio w="300px" h="300px" ratio={1}>
+            <Wrap w="300px" h="300px" px="1rem" spacing={4} justify="center">
               <WrapItem
+                w="280px"
+                h="280px"
                 boxShadow="base"
                 rounded="20px"
                 overflow="hidden"
@@ -60,9 +63,11 @@ const Product = ({ id, image, name, price, mprice, lprice, size }) => {
               >
                 <Image
                   src={`${images_url}${image}`}
+                  fallbackSrc="https://via.placeholder.com/150"
                   alt={name}
-                  boxSize="100%"
-                  objectFit="cover"
+                  width="100%"
+                  display="block"
+                  fit="cover"
                 />
               </WrapItem>
             </Wrap>

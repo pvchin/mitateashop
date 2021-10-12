@@ -4,7 +4,7 @@ import { useProductsContext } from "../context/products_context";
 import { single_product_url as url } from "../utils/constants";
 import currency from "currency.js";
 import { useRecoilState } from "recoil";
-import { orderItemState } from "./data/atomdata";
+import { orderItemState } from "../data/atomdata";
 import { formatPrice } from "../utils/helpers";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { createLocalStorageStateHook } from "use-local-storage-state";
@@ -37,12 +37,12 @@ import {
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { images_url, carts_localstorage_key } from "../utils/constants";
-import { useToppings } from "../components/react-query/toppings/useToppings";
-import { useOrderItems } from "./react-query/orderitems/useOrderItems";
-import { useAddOrderItems } from "./react-query/orderitems/useCreateOrderItems";
-import { useDeleteItems } from "./react-query/items/useDeleteItems";
-import { useUpdateItems } from "./react-query/items/useUpdateItems";
-import { useCarts } from "./react-query/carts/useCarts";
+import { useToppings } from "../react-query/toppings/useToppings";
+import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+import { useAddOrderItems } from "../react-query/orderitems/useCreateOrderItems";
+import { useDeleteItems } from "../react-query/items/useDeleteItems";
+import { useUpdateItems } from "../react-query/items/useUpdateItems";
+import { useCarts } from "../react-query/carts/useCarts";
 
 const SingleProduct = () => {
   //const { id } = useParams();
@@ -205,7 +205,7 @@ const SingleProduct = () => {
     <Wrapper>
       <VStack>
         <PageHero title={name} product />
-        <Box pl={10} align="left" border="1px solid yelloe">
+        <Box pl={10} align="left" >
           <Link to="/products" className="btn">
             back to products
           </Link>
@@ -219,9 +219,9 @@ const SingleProduct = () => {
                 md: "repeat(2, 1fr)",
               }}
               gap={2}
-              border="1px solid blue"
+              //border="1px solid blue"
             >
-              <GridItem colSpan={1} align="center" border="1px solid red">
+              <GridItem colSpan={1} align="center" >
                 <Box boxSize="lg" h="500px">
                   <AspectRatio maxW="md" ratio={1}>
                     <Image
@@ -233,7 +233,7 @@ const SingleProduct = () => {
                   </AspectRatio>
                 </Box>
               </GridItem>
-              <GridItem colSpan={1} border="1px solid green">
+              <GridItem colSpan={1} bg="gray.100">
                 <Box p={5} mb={50}>
                   <Heading size="md">{name}</Heading>
                   {/* <Stars stars={stars} reviews={reviews} /> */}
@@ -416,6 +416,10 @@ const SingleProduct = () => {
                   <Box py={50}>
                     <Button
                       variant="solid"
+                      border="1px solid green"
+                      borderRadius="10"
+                      color="green"
+                      bg="green.50"
                       onClick={(e) => handleButtonSubmit(e)}
                     >
                       Add To Order {formatPrice(orderitem.totalprice)} (
