@@ -22,12 +22,12 @@ ReactDOM.render(
   <ChakraProvider theme={theme}>
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        {/* <Auth0Provider
+        <Auth0Provider
           domain="dev-f66j80-e.us.auth0.com"
           clientId="5rpDhSrZRFYymenb2cvEQcLBblEUB39B"
           redirectUri={window.location.origin}
           cacheLocation="localstorage"
-        > */}
+        >
           <UserProvider>
             <ProductsProvider>
               <FilterProvider>
@@ -40,7 +40,7 @@ ReactDOM.render(
               </FilterProvider>
             </ProductsProvider>
           </UserProvider>
-        {/* </Auth0Provider> */}
+        </Auth0Provider>
       </RecoilRoot>
       <ReactQueryDevtools />
     </QueryClientProvider>

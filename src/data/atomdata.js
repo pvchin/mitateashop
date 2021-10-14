@@ -64,3 +64,8 @@ export const currentorderState = atom({
     currentorderno: "",
   },
 });
+
+export const isSidebarOpenState = atom({
+  key: "isSidebarOpenState",
+  default: false,
+});

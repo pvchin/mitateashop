@@ -12,7 +12,7 @@ import { isSidebarOpenState } from "../data/atomdata";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
-  //const [isSidebarOpen, setIsSidebarOpen] = useRecoilState(isSidebarOpenState);
+  const [isSideBarOpen, setIsSideBarOpen] = useRecoilState(isSidebarOpenState)
   const { myUser } = useUserContext();
 
   return (
@@ -22,11 +22,7 @@ const Sidebar = () => {
       >
         <div className="sidebar-header">
           <img src={logo} className="logo" alt="mita tea shop" />
-          <button
-            type="button"
-            className="close-btn"
-            onClick={closeSidebar}
-          >
+          <button type="button" className="close-btn" onClick={closeSidebar}>
             <FaTimes />
           </button>
         </div>

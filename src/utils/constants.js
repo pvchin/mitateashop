@@ -32,12 +32,12 @@ export const links = [
     url: "/products",
   },
   {
-    id: 3,
+    id: 4,
     text: "orders",
     url: "/userorders",
   },
   {
-    id: 4,
+    id: 5,
     text: "admin",
     url: "/admin",
   },

@@ -8,8 +8,11 @@ import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
 import { useProductsContext } from "../context/products_context";
 import { useUserContext } from "../context/user_context";
+import { useRecoilState } from "recoil";
+import { isSidebarOpenState } from "../data/atomdata";
 
 const Nav = () => {
+  //const [isSidebarOpen, setIsSidebarOpen] = useRecoilState(isSidebarOpenState);
   const { openSidebar } = useProductsContext();
   const { myUser } = useUserContext();
 
@@ -20,7 +23,11 @@ const Nav = () => {
           <Link to="/">
             <img src={logo} alt="mita tea shop" />
           </Link>
-          <button type="button" className="nav-toggle" onClick={openSidebar}>
+          <button
+            type="button"
+            className="nav-toggle"
+            onClick={openSidebar}
+          >
             <FaBars />
           </button>
         </div>
