@@ -19,7 +19,7 @@ const FeaturedProducts = () => {
         <div className="underline"></div>
       </div>
       <div className="section-center featured">
-        {items &&
+        {items.length > 0 &&
           items
             .filter((r) => r.featured === true)
             .slice(0, 3)
