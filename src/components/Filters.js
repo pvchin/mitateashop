@@ -8,7 +8,22 @@ import { useRecoilState } from "recoil";
 import { filtersState } from "../data/atomdata";
 
 const Filters = () => {
-  const [filters, setFilters] = useRecoilState(filtersState)
+  const [filters, setFilters] = useRecoilState(filtersState);
+  // const {
+  //   filters: {
+  //     text,
+  //     category,
+  //     company,
+  //     color,
+  //     min_price,
+  //     price,
+  //     max_price,
+  //     shipping,
+  //   },
+  //   updateFilters,
+  //   clearFilters,
+  //   //all_products,
+  // } = useFilterContext();
   const {
     filters: {
       text,
@@ -28,7 +43,7 @@ const Filters = () => {
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
-  
+  console.log("Category", categories);
   return (
     <Wrapper>
       <div className="content">
