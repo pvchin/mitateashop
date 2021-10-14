@@ -3,11 +3,6 @@
  publish = '/build'
  functions = './functions'
 
-[[redirects]]
- from = '/graphql/*'
- to = '/.netlify/functions/graphql:splat'
- status = 200
-
  [[redirects]]
  from = '/api/*'
  to = '/.netlify/functions/:splat'
