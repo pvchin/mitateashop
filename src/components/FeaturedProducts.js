@@ -22,7 +22,7 @@ const FeaturedProducts = () => {
         {items.length > 0 &&
           items
             .filter((r) => r.featured === true)
-            .slice(0, 3)
+            //.slice(0, 3)
             .map((product) => {
               return <FeaturedProduct key={product.id} {...product} />;
             })}
