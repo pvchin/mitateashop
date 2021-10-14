@@ -9,10 +9,10 @@ import FeaturedProduct from "./FeaturedProduct";
 import { useItems } from "../react-query/items/useItems";
 
 const FeaturedProducts = () => {
-  const { items } = useItems();
-  const { featured_products: featured } = useProductsContext();
+  const { items: featured } = useItems();
+  //const { featured_products: featured } = useProductsContext();
 
-  
+  console.log("filters", featured)
   return (
     <Wrapper className="section">
       <div className="title">
@@ -20,8 +20,8 @@ const FeaturedProducts = () => {
         <div className="underline"></div>
       </div>
       <div className="section-center featured">
-        {items.length > 0 &&
-          items
+        {featured.length > 0 &&
+          featured
             .filter((r) => r.featured === true)
             //.slice(0, 3)
             .map((product) => {
