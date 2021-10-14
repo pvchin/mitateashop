@@ -7,9 +7,15 @@ import axios from "axios";
 import { queryKeys } from "../constants";
 
 async function getItems(id) {
-  //const { data } = await axios.get(`${items_url}`);
-  const { data } = await axios.get(`${items_url}?id=${id}`);
-  return data;
+  if (id) {
+    console.log("here")
+    const { data } = await axios.get(`${items_url}?id=${id}`);
+    return data;
+  } else {
+    console.log("not here")
+    const { data } = await axios.get(`${items_url}`);
+    return data;
+  }
 }
 
 export function useItems() {
