@@ -12,6 +12,7 @@ const FeaturedProducts = () => {
   const { items } = useItems();
   const { featured_products: featured } = useProductsContext();
 
+  
   return (
     <Wrapper className="section">
       <div className="title">
