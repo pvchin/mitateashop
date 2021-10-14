@@ -3,9 +3,9 @@ import { FeaturedProducts, Hero, Services, Contact } from "../components";
 const HomePage = () => {
   return (
     <main>
-      <Hero />
+      {/* <Hero /> */}
       {/* <FeaturedProducts /> */}
-      <Services />
+      {/* <Services /> */}
       {/* <Contact /> */}
     </main>
   );
