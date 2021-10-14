@@ -20,9 +20,12 @@ const FeaturedProducts = () => {
       </div>
       <div className="section-center featured">
         {items &&
-          items.slice(0, 3).map((product) => {
-            return <FeaturedProduct key={product.id} {...product} />;
-          })}
+          items
+            .filter((r) => r.featured === true)
+            .slice(0, 3)
+            .map((product) => {
+              return <FeaturedProduct key={product.id} {...product} />;
+            })}
       </div>
       <Link to="/products" className="btn">
         all products
