@@ -1,8 +1,8 @@
 const graphql = require("graphql");
 const axios = require("axios");
 const _ = require("lodash");
-const formattedReturn = require("../formattedReturn");
-const { table } = require("../itemsTable/airtable-items");
+const formattedReturn = require("../../functions/formattedReturn");
+const { table } = require("../../functions/itemsTable/airtable-items");
 
 const {
   GraphQLObjectType,
@@ -14,7 +14,7 @@ const {
   GraphQLList,
   GraphQLSchema,
 } = graphql;
-const getItems = require("../itemsTable/getItems");
+const getItems = require("../../functions/itemsTable/getItems");
 const items_url = "/api/items";
 
 // const users = [
