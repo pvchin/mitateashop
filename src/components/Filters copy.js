@@ -23,12 +23,12 @@ const Filters = () => {
     updateFilters,
     clearFilters,
     //all_products,
-  } = filters;
+  } = useFilterContext();
   const { items: all_products } = useItems();
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
-  
+  console.log("Category", categories)
   return (
     <Wrapper>
       <div className="content">
