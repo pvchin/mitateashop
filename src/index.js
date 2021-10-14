@@ -29,16 +29,16 @@ ReactDOM.render(
           cacheLocation="localstorage"
         >
           <UserProvider>
-            <ProductsProvider>
-              <FilterProvider>
-                <CartProvider>
-                  <div>
-                    <Loading />
-                    <App />
-                  </div>
-                </CartProvider>
-              </FilterProvider>
-            </ProductsProvider>
+            {/* <ProductsProvider> */}
+            {/* <FilterProvider> */}
+            <CartProvider>
+              <div>
+                <Loading />
+                <App />
+              </div>
+            </CartProvider>
+            {/* </FilterProvider> */}
+            {/* </ProductsProvider> */}
           </UserProvider>
         </Auth0Provider>
       </RecoilRoot>
