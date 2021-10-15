@@ -1,7 +1,7 @@
 import React from "react";
 import { GiCompass, GiDiamondHard, GiStabbedNote } from "react-icons/gi";
-//export const items_url = "/api/items";
-export const items_url = "/.netlify/functions/items";
+export const items_url = "/api/items";
+//export const items_url = "/.netlify/functions/items";
 export const users_url = "/api/users";
 export const toppings_url = "/api/toppings";
 export const orders_url = "/api/orders";

@@ -30,14 +30,14 @@ ReactDOM.render(
         > */}
           <UserProvider>
             <ProductsProvider>
-              {/* <FilterProvider> */}
+              <FilterProvider>
                 <CartProvider>
                   <div>
                     <Loading />
                     <App />
                   </div>
                 </CartProvider>
-              {/* </FilterProvider> */}
+              </FilterProvider>
             </ProductsProvider>
           </UserProvider>
         {/* </Auth0Provider> */}

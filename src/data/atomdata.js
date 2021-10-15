@@ -1,5 +1,10 @@
 import { atom } from "recoil";
 
+export const itemsStae = atom({
+  key: "itemsState",
+  default: {}
+})
+
 export const orderItemState = atom({
   key: "orderItemState",
   default: {
