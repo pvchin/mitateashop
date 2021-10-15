@@ -1,2 +1,2 @@
-/api/* /.netlify/functions/:splat
+/api/* https://mitateashop.netlify.app/.netlify/functions/:splat
 /* /index.html 200     
