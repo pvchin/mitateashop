@@ -1,2 +1,2 @@
-/api/* https://yourapi.domain.com/:splat 200
+/api/* /.netlify/functions/:splat
 /* /index.html 200     
