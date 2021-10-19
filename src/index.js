@@ -28,22 +28,23 @@ ReactDOM.render(
           redirectUri={window.location.origin}
           cacheLocation="localstorage"
         > */}
-          <UserProvider>
-            <ProductsProvider>
-              <FilterProvider>
-                <CartProvider>
-                  <div>
-                    <Loading />
-                    <App />
-                  </div>
-                </CartProvider>
-              </FilterProvider>
-            </ProductsProvider>
-          </UserProvider>
+        <UserProvider>
+          <ProductsProvider>
+            <FilterProvider>
+              <CartProvider>
+                <div>
+                  <Loading />
+                  <App />
+                </div>
+              </CartProvider>
+            </FilterProvider>
+          </ProductsProvider>
+        </UserProvider>
         {/* </Auth0Provider> */}
       </RecoilRoot>
       <ReactQueryDevtools />
     </QueryClientProvider>
   </ChakraProvider>,
-  document.getElementById("root")
+  //document.getElementById("root")
+  (document.getElementById("root").style.transform = "scale(1)")
 );

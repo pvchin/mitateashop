@@ -7,13 +7,11 @@ import { createLocalStorageStateHook } from "use-local-storage-state";
 import axios from "axios";
 import { queryKeys } from "../constants";
 
-
-
 export function useCarts() {
   const [filter, setFilter] = useState("all");
   const [itemId, setItemId] = useState("");
   const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
-  const [mcarts, setMCarts] = useMCarts();
+  const [mcarts, setMCarts, { removeItem }] = useMCarts();
 
   const selectFn = useCallback(
     (unfiltered) => filterByItemId(unfiltered, filter),
@@ -30,9 +28,13 @@ export function useCarts() {
   );
 
   function getCarts() {
-  const data = mcarts ? mcarts : []
-  return data;
-}
+    const data = mcarts ? mcarts : [];
+    return data;
+  }
 
-  return { carts, filter, setFilter, setItemId };
+  function clearCarts() {
+    removeItem();
+  }
+
+  return { carts, filter, setFilter, setItemId, clearCarts };
 }

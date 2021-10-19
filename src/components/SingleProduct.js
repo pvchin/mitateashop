@@ -3,8 +3,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 import { single_product_url as url } from "../utils/constants";
 import currency from "currency.js";
+import { useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import { orderItemState } from "../data/atomdata";
+import { cartsTotalItemsState } from "../data/atomdata";
 import { formatPrice } from "../utils/helpers";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { createLocalStorageStateHook } from "use-local-storage-state";
@@ -43,13 +45,17 @@ import { useAddOrderItems } from "../react-query/orderitems/useCreateOrderItems"
 import { useDeleteItems } from "../react-query/items/useDeleteItems";
 import { useUpdateItems } from "../react-query/items/useUpdateItems";
 import { useCarts } from "../react-query/carts/useCarts";
+import { useAddCarts } from "../react-query/carts/useCreateCarts";
 
 const SingleProduct = () => {
   //const { id } = useParams();
   const history = useHistory();
+   const queryClient = useQueryClient();
   const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
   const [mcarts, setMCarts] = useMCarts();
+  const [totalItems, setTotalItems] = useRecoilState(cartsTotalItemsState);
   const { carts } = useCarts();
+  const addCart = useAddCarts();
   const { toppings, setToppingId } = useToppings();
   const { orderitems, setOrderItemId } = useOrderItems();
   const addOrderItems = useAddOrderItems();
@@ -111,8 +117,11 @@ const SingleProduct = () => {
   };
 
   const Update_OrderItem = () => {
-    const newdata = { ...orderitem };
-    setMCarts([...mcarts, newdata]);
+    const newdata = [...mcarts, orderitem];
+    //addCart(orderitem);
+    setMCarts(newdata);
+    queryClient.invalidateQueries("carts");
+    setTotalItems((prev) => (prev = newdata.length));
   };
 
   const handleSizeBox = (e) => {
@@ -205,7 +214,7 @@ const SingleProduct = () => {
     <Wrapper>
       <VStack>
         <PageHero title={name} product />
-        <Box pl={10} align="left" >
+        <Box pl={10} align="left">
           <Link to="/products" className="btn">
             back to products
           </Link>
@@ -221,7 +230,7 @@ const SingleProduct = () => {
               gap={2}
               //border="1px solid blue"
             >
-              <GridItem colSpan={1} align="center" >
+              <GridItem colSpan={1} align="center">
                 <Box boxSize="lg" h="500px">
                   <AspectRatio maxW="md" ratio={1}>
                     <Image

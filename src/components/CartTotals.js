@@ -62,9 +62,9 @@ const CartTotals = ({ items }) => {
   //const { total_amount, shipping_fee } = useCartContext();
   //const { myUser, loginWithRedirect } = useUserContext();
 
-  useEffect(() => {
-    setOrderId(authuser[0].email);
-  });
+  // useEffect(() => {
+  //   setOrderId(authuser[0].email);
+  // });
 
   useEffect(() => {
     if (items) {
@@ -72,9 +72,9 @@ const CartTotals = ({ items }) => {
     }
   }, [items]);
 
-  useEffect(() => {
-    setUserId(authuser ? authuser[0].token : "");
-  }, [authuser]);
+  // useEffect(() => {
+  //   setUserId(authuser ? authuser[0].token : "");
+  // }, [authuser]);
 
   const handleCalc = () => {
     const totamount = items.reduce((acc, rec) => {
@@ -90,10 +90,10 @@ const CartTotals = ({ items }) => {
   const handleCheckOut = () => {
     // generate new order no
 
-    const newOrderNo = parseFloat(document[0].orderno) + 1;
+    // const newOrderNo = parseFloat(document[0].orderno) + 1;
     const orderdata = {
       ...order,
-      orderno: newOrderNo.toString(),
+      //orderno: newOrderNo.toString(),
       email: authuser ? authuser[0].email : "",
       custname: users.length > 0 ? users[0].name : "",
       phone: users.length > 0 ? users[0].phone : "",
@@ -110,71 +110,71 @@ const CartTotals = ({ items }) => {
       status: "Pending",
     };
     setOrder(orderdata);
-    updateDocument({ id: document[0].id, orderno: newOrderNo.toString() });
+    //updateDocument({ id: document[0].id, orderno: newOrderNo.toString() });
 
     //save current orderno
     setCurrentOrder({
       ...currentorder,
       deliverymode: "pickup",
       area: users.length > 0 ? users[0].area : "",
-      currentorderno: newOrderNo.toString(),
+      //currentorderno: newOrderNo.toString(),
       grossamount: totalamount,
       nettamount: totalamount,
       deliveryfee: 0,
     });
 
     // save order header
-    addOrders({
-      orderno: newOrderNo.toString(),
-      email: authuser ? authuser[0].email : "",
-      custname: users[0].name,
-      phone: users[0].phone,
-      address1: users[0].address1,
-      address2: users[0].address2,
-      grossamount: totalamount,
-      deliveryfee: 0,
-      nettamount: totalamount,
-      deliverymode: "pickup",
-      paymentmode: "bank",
-      area: "",
-      status: "Pending",
-    });
+    // addOrders({
+    //   orderno: newOrderNo.toString(),
+    //   email: authuser ? authuser[0].email : "",
+    //   custname: users[0].name,
+    //   phone: users[0].phone,
+    //   address1: users[0].address1,
+    //   address2: users[0].address2,
+    //   grossamount: totalamount,
+    //   deliveryfee: 0,
+    //   nettamount: totalamount,
+    //   deliverymode: "pickup",
+    //   paymentmode: "bank",
+    //   area: "",
+    //   status: "Pending",
+    // });
 
-    mcarts &&
-      mcarts.forEach((rec) => {
-        const { addon } = rec;
-        const toppings = addon;
+    // mcarts &&
+    //   mcarts.forEach((rec) => {
+    //     const { addon } = rec;
+    //     const toppings = addon;
 
-        addOrderItems({
-          orderno: newOrderNo.toString(),
-          orderitemid: rec.id,
-          itemid: rec.itemid,
-          name: rec.name,
-          price: rec.price,
-          nettprice: rec.nettprice,
-          qty: rec.qty,
-          image: rec.image,
-          totalprice: rec.totalprice,
-          sugarlevel: rec.sugarlevel,
-          icelevel: rec.icelevel,
-          mprice: rec.mprice,
-          lprice: rec.lprice,
-          size: rec.size,
-        });
+    //     addOrderItems({
+    //       orderno: newOrderNo.toString(),
+    //       orderitemid: rec.id,
+    //       itemid: rec.itemid,
+    //       name: rec.name,
+    //       price: rec.price,
+    //       nettprice: rec.nettprice,
+    //       qty: rec.qty,
+    //       image: rec.image,
+    //       totalprice: rec.totalprice,
+    //       sugarlevel: rec.sugarlevel,
+    //       icelevel: rec.icelevel,
+    //       mprice: rec.mprice,
+    //       lprice: rec.lprice,
+    //       size: rec.size,
+    //     });
 
-        toppings
-          .filter((r) => r.checked === true)
-          .forEach((item) => {
-            addOrderAddon({
-              orderno: newOrderNo.toString(),
-              orderitemid: rec.id,
-              name: item.name,
-              description: item.description,
-              price: item.price,
-              checked: item.checked,
-            });
-          });
-      });
+    //     toppings
+    //       .filter((r) => r.checked === true)
+    //       .forEach((item) => {
+    //         addOrderAddon({
+    //           orderno: newOrderNo.toString(),
+    //           orderitemid: rec.id,
+    //           name: item.name,
+    //           description: item.description,
+    //           price: item.price,
+    //           checked: item.checked,
+    //         });
+    //       });
+    //   });
 
     history.push("/checkout");
   };

@@ -84,6 +84,7 @@ const CartItem = ({
   };
 
   const handleOnDeleteConfirm = () => {
+    console.log("ondelee", id)
     Delete_Item(id);
   };
   return (

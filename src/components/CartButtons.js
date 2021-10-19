@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
+import { createLocalStorageStateHook } from "use-local-storage-state";
 import styled from "styled-components";
 import {
   Box,
@@ -16,42 +17,47 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useRecoilState } from "recoil";
+import { cartsTotalItemsState } from "../data/atomdata";
+import { carts_localstorage_key } from "../utils/constants";
 import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { useCarts } from "../react-query/carts/useCarts";
-import { useAuthUser } from "../react-query/auth/useAuthUser"
-import Signin from "./Signin"
+import { useAuthUser } from "../react-query/auth/useAuthUser";
+import Signin from "./Signin";
 
 const CartButtons = () => {
-  const history = useHistory()
-  const { carts } = useCarts();
-  const { authuser, updateAuthUser, clearAuthUser} = useAuthUser()
+  const history = useHistory();
+  //const { carts } = useCarts();
+  const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
+  const [mcarts, setMCarts, { removeItem }] = useMCarts();
+  const { authuser, updateAuthUser, clearAuthUser } = useAuthUser();
   const { closeSidebar } = useProductsContext();
   const { total_items } = useCartContext();
   //const { loginWithRedirect, myUser, logout } = useUserContext();
-  const [totalitems, setTotalItems] = useState(0);
+  const [totalitems, setTotalItems] = useRecoilState(cartsTotalItemsState);
   const [isLoad, setIsLoad] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log("totalitems", totalitems);
-  console.log("authuser", authuser ? authuser : "none")
-  console.log("authuser length", authuser ? authuser.length : 0)
+  // console.log("totalitems", totalitems);
+  console.log("authuser", authuser ? authuser : "none");
+  console.log("authuser length", authuser ? authuser.length : 0);
 
   useEffect(() => {
-    if (carts) {
-      setTotalItems(carts.length);
+    if (mcarts) {
+      setTotalItems(mcarts.length);
       setIsLoad(false);
     }
   }, [isLoad]);
 
   const handleSignin = () => {
-    history.push("/signin")
-  }
+    history.push("/signin");
+  };
 
   const handleLogOut = () => {
-    clearAuthUser()
-    history.push("/")
-  }
+    clearAuthUser();
+    history.push("/");
+  };
 
   return (
     <Wrapper className="cart-btn-wrapper">
@@ -63,11 +69,7 @@ const CartButtons = () => {
         </span>
       </Link>
       {authuser && authuser.length > 0 ? (
-        <button
-          type="button"
-          className="auth-btn"
-          onClick={handleLogOut}
-        >
+        <button type="button" className="auth-btn" onClick={handleLogOut}>
           Logout <FaUserMinus />
         </button>
       ) : (

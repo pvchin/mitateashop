@@ -1,9 +1,14 @@
 import { atom } from "recoil";
 
-export const itemsStae = atom({
+export const itemsState = atom({
   key: "itemsState",
-  default: {}
-})
+  default: {},
+});
+
+export const cartsTotalItemsState = atom({
+  key: "cartsTotalItemsState",
+  default: 0,
+});
 
 export const orderItemState = atom({
   key: "orderItemState",

@@ -5,34 +5,40 @@ import { createLocalStorageStateHook } from "use-local-storage-state";
 import { useCartContext } from "../context/cart_context";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { orderItemState } from "../data/atomdata";
+import { cartsTotalItemsState } from "../data/atomdata";
 import CartColumns from "./CartColumns";
 import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
-import { carts_localstorage_key } from "../utils/constants"
+import { carts_localstorage_key } from "../utils/constants";
+import { useCarts } from "../react-query/carts/useCarts";
+import { useDeleteCarts } from "../react-query/carts/useDeleteCarts";
 
 const CartContent = () => {
   //const { cart, clearCart } = useCartContext();
   const history = useHistory();
+  const { carts } = useCarts();
+  const deleteCart = useDeleteCarts();
   const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
   const [mcarts, setMCarts, { removeItem }] = useMCarts();
-  const [cartitems, setCartItems] = useState([]);
+  const [totalItems, setTotalItems] = useRecoilState(cartsTotalItemsState);
+  //const [cartitems, setCartItems] = useState([]);
   const [isLoad, setIsLoad] = useState(true);
 
-  console.log(carts_localstorage_key, mcarts);
-  
+  console.log("Carts", carts);
+
   const Delete_Item = (id) => {
-    const data = cartitems
+    const data = mcarts
       .filter((r) => r.id !== id)
       .map((rec) => {
         return { ...rec };
       });
-    setCartItems([...data]);
+    deleteCart(id);
+    setTotalItems((prev) => (prev = data.length));
   };
 
   const Update_Item = (id, orderqty) => {
     const qty = orderqty;
-    const upddata = cartitems
+    const upddata = mcarts
       .filter((r) => r.id === id)
       .map((rec) => {
         const total =
@@ -41,30 +47,30 @@ const CartContent = () => {
         return { ...rec, qty: qty, totalprice: total };
       });
 
-    const olddata = cartitems
+    const olddata = mcarts
       .filter((r) => r.id !== id)
       .map((rec) => {
         return { ...rec };
       });
     const itemdata = [...olddata, ...upddata];
     console.log(itemdata);
-    setCartItems(itemdata);
+    setMCarts(itemdata);
   };
 
   const handleSaveItem = () => {
-    setMCarts(cartitems);
+    //setMCarts(cartitems);
     history.push("/products");
   };
 
-  useEffect(() => {
-    setCartItems(mcarts);
-  }, []);
+  // useEffect(() => {
+  //   setMCarts(mcarts);
+  // }, []);
 
   return (
     <Wrapper className="section section-center">
       <CartColumns />
-      {cartitems &&
-        cartitems
+      {carts &&
+        carts
           .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
           .map((item) => {
             return (
@@ -81,7 +87,7 @@ const CartContent = () => {
         <button type="button" className="link-btn" onClick={handleSaveItem}>
           save and continue shopping
         </button>
-        
+
         <button
           type="button"
           className="link-btn clear-btn"
@@ -90,7 +96,7 @@ const CartContent = () => {
           clear shopping cart
         </button>
       </div>
-      <CartTotals items={cartitems} />
+      <CartTotals items={mcarts} />
     </Wrapper>
   );
 };
