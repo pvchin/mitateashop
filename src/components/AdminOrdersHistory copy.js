@@ -201,13 +201,12 @@ const tableIcons = {
     <ChevronLeft {...props} ref={ref} />
   )),
 };
-
-const AdminOrdersHistory = ({ status }) => {
+const UserOrdersHistory = () => {
   const toast = useCustomToast();
   const { orders, setOrderId } = useOrders();
-  // const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
-  // const { orderitems, setOrderItemId } = useOrderItems();
-  // const { orderaddon, setOrderAddonId } = useOrderAddon();
+  const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
+  const { orderitems, setOrderItemId } = useOrderItems();
+  const { orderaddon, setOrderAddonId } = useOrderAddon();
   const [currentorder, setCurrentOrder] = useState({});
   const updateOrder = useUpdateOrders();
   const {
@@ -228,11 +227,11 @@ const AdminOrdersHistory = ({ status }) => {
 
   const handleViewOrder = (rowData) => {
     let todayDate = new Date();
-    // setCurrentOrder({ orderid: rowData.id, orderno: rowData.orderno });
-    // setSingleOrderId(rowData.email);
-    // setSingleOrderNo(rowData.orderno);
-    // setOrderItemId(rowData.orderno);
-    // setOrderAddonId(rowData.orderno);
+    setCurrentOrder({ orderid: rowData.id, orderno: rowData.orderno });
+    setSingleOrderId(rowData.email);
+    setSingleOrderNo(rowData.orderno);
+    setOrderItemId(rowData.orderno);
+    setOrderAddonId(rowData.orderno);
     onViewOrderOpen();
   };
 
@@ -276,132 +275,140 @@ const AdminOrdersHistory = ({ status }) => {
           <Heading>Admin Orders History</Heading>
         </Box> */}
         <Box align="center">
-          {status === "confirm" && (
-            <Box w="100%">
-              <MaterialTable
-                columns={confirm_columns}
-                data={
-                  orders &&
-                  orders
-                    .filter((r) => r.status === "Confirmed")
-                    .map((rec) => {
-                      return { ...rec };
-                    })
-                }
-                title="Confirm Orders"
-                icons={tableIcons}
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: true,
-                  headerStyle: {
-                    backgroundColor: "#9AE6B4",
-                    color: "black",
-                    fontWeight: "bold",
-                  },
-                  showTitle: true,
-                }}
-                actions={[
-                  (rowData) => ({
-                    //disabled: rowData.status !== "Pending",
-                    icon: () => <GrFormView size="33px" />,
-                    tooltip: "View Order",
-                    onClick: (event, rowData) => {
-                      handleViewOrder(rowData);
-                    },
-                  }),
-                  (rowData) => ({
-                    // disabled: rowData.status !== "Pending",
-                    icon: () => <AiFillDelete />,
-                    tooltip: "Delete Order",
-                    onClick: (event, rowData) => {
-                      handleDeleteOrder(rowData);
-                    },
-                  }),
-                  (rowData) => ({
-                    // disabled: rowData.status !== "Pending",
-                    icon: () => <GrDeliver />,
-                    tooltip: "Deliver Order",
-                    onClick: (event, rowData) => {
-                      handleDeliverOrder(rowData);
-                    },
-                  }),
-                ]}
-              />
-            </Box>
-          )}
+          <Tabs align="center">
+            <TabList>
+              <Tab>Confirmed</Tab>
+              <Tab>Deleted</Tab>
+              <Tab>Delivered</Tab>
+            </TabList>
 
-          {status === "deleted" && (
-            <Box w="100%">
-              <MaterialTable
-                columns={others_columns}
-                data={orders
-                  .filter((r) => r.status === "Deleted")
-                  .map((rec) => {
-                    return { ...rec };
-                  })}
-                title="Deleted Orders"
-                icons={tableIcons}
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: true,
-                  headerStyle: {
-                    backgroundColor: "#9AE6B4",
-                    color: "black",
-                    fontWeight: "bold",
-                  },
-                  showTitle: true,
-                }}
-                actions={[
-                  (rowData) => ({
-                    //disabled: rowData.status !== "Pending",
-                    icon: () => <GrFormView size="33px" />,
-                    tooltip: "View Order",
-                    onClick: (event, rowData) => {
-                      handleViewOrder(rowData);
-                    },
-                  }),
-                ]}
-              />
-            </Box>
-          )}
-
-          {status === "delivery" && (
-            <Box w="100%">
-              <MaterialTable
-                columns={others_columns}
-                data={orders
-                  .filter((r) => r.status === "Delivered")
-                  .map((rec) => {
-                    return { ...rec };
-                  })}
-                title="Delivered Orders"
-                icons={tableIcons}
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: true,
-                  headerStyle: {
-                    backgroundColor: "#9AE6B4",
-                    color: "black",
-                    fontWeight: "bold",
-                  },
-                  showTitle: true,
-                }}
-                actions={[
-                  (rowData) => ({
-                    //disabled: rowData.status !== "Pending",
-                    icon: () => <GrFormView size="33px" />,
-                    tooltip: "View Order",
-                    onClick: (event, rowData) => {
-                      handleViewOrder(rowData);
-                    },
-                  }),
-                ]}
-              />
-            </Box>
-          )}
+            <TabPanels>
+              <TabPanel>
+                <Box w="80%">
+                  {/* <MaterialTable
+                    columns={confirm_columns}
+                    data={
+                      orders &&
+                      orders
+                        .filter((r) => r.status === "Confirmed")
+                        .map((rec) => {
+                          return { ...rec };
+                        })
+                    }
+                    title="Orders Tables"
+                    icons={tableIcons}
+                    options={{
+                      filtering: false,
+                      search: false,
+                      toolbar: false,
+                      headerStyle: {
+                        backgroundColor: "#9AE6B4",
+                        color: "black",
+                        fontWeight: "bold",
+                      },
+                      showTitle: false,
+                    }}
+                    actions={[
+                      (rowData) => ({
+                        //disabled: rowData.status !== "Pending",
+                        icon: () => <GrFormView size="33px" />,
+                        tooltip: "View Order",
+                        onClick: (event, rowData) => {
+                          handleViewOrder(rowData);
+                        },
+                      }),
+                      (rowData) => ({
+                        // disabled: rowData.status !== "Pending",
+                        icon: () => <AiFillDelete />,
+                        tooltip: "Delete Order",
+                        onClick: (event, rowData) => {
+                          handleDeleteOrder(rowData);
+                        },
+                      }),
+                      (rowData) => ({
+                        // disabled: rowData.status !== "Pending",
+                        icon: () => <GrDeliver />,
+                        tooltip: "Deliver Order",
+                        onClick: (event, rowData) => {
+                          handleDeliverOrder(rowData);
+                        },
+                      }),
+                    ]}
+                  /> */}
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box w="80%">
+                  {/* <MaterialTable
+                    columns={others_columns}
+                    data={orders
+                      .filter((r) => r.status === "Deleted")
+                      .map((rec) => {
+                        return { ...rec };
+                      })}
+                    title="Orders Tables"
+                    icons={tableIcons}
+                    options={{
+                      filtering: false,
+                      search: false,
+                      toolbar: false,
+                      headerStyle: {
+                        backgroundColor: "#9AE6B4",
+                        color: "black",
+                        fontWeight: "bold",
+                      },
+                      showTitle: false,
+                    }}
+                    actions={[
+                      (rowData) => ({
+                        //disabled: rowData.status !== "Pending",
+                        icon: () => <GrFormView size="33px" />,
+                        tooltip: "View Order",
+                        onClick: (event, rowData) => {
+                          handleViewOrder(rowData);
+                        },
+                      }),
+                    ]}
+                  /> */}
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box w="80%">
+                  {/* <MaterialTable
+                    columns={others_columns}
+                    data={orders
+                      .filter((r) => r.status === "Delivered")
+                      .map((rec) => {
+                        return { ...rec };
+                      })}
+                    title="Orders Tables"
+                    icons={tableIcons}
+                    options={{
+                      filtering: false,
+                      search: false,
+                      toolbar: false,
+                      headerStyle: {
+                        backgroundColor: "#9AE6B4",
+                        color: "black",
+                        fontWeight: "bold",
+                      },
+                      showTitle: false,
+                    }}
+                    actions={[
+                      (rowData) => ({
+                        //disabled: rowData.status !== "Pending",
+                        icon: () => <GrFormView size="33px" />,
+                        tooltip: "View Order",
+                        onClick: (event, rowData) => {
+                          handleViewOrder(rowData);
+                        },
+                      }),
+                    ]}
+                  /> */}
+                </Box>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Box>
         <Modal onClose={onViewOrderClose} size="6xl" isOpen={isViewOrderOpen}>
           <ModalOverlay />
@@ -419,7 +426,7 @@ const AdminOrdersHistory = ({ status }) => {
                   overflowY={{ base: "scoll", md: "none" }}
                   //h={{ base: "auto", md: "180vh" }}
                 >
-                  {/* <OrderInfoView order={[...singleorder]} /> */}
+                  <OrderInfoView order={[...singleorder]} />
                 </Box>
                 <VStack
                   w={{ base: "auto", md: "60%" }}
@@ -431,10 +438,10 @@ const AdminOrdersHistory = ({ status }) => {
                 >
                   <VStack alignItems="flex-start" spacing={3}>
                     <Heading size="2x1">Your cart</Heading>
-                    {/* <Heading fontFamily="cursive" color="green" size="md">
+                    <Heading fontFamily="cursive" color="green" size="md">
                       order no{" "}
                       {singleorder.length > 0 && singleorder[0].orderno}
-                    </Heading> */}
+                    </Heading>
                   </VStack>
                   <HStack spacing="6" alignItems="center" w="full">
                     <Stack
@@ -446,10 +453,10 @@ const AdminOrdersHistory = ({ status }) => {
                       //alignItems="center"
                       overflowY="scroll"
                     >
-                      {/* <OrderDetails
+                      <OrderDetails
                         orderdetails={orderitems}
                         orderaddon={orderaddon}
-                      /> */}
+                      />
                     </Stack>
                   </HStack>
                 </VStack>
@@ -567,4 +574,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default AdminOrdersHistory;
+export default UserOrdersHistory;

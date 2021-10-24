@@ -18,6 +18,7 @@ import {
 } from "./pages";
 import SingleProduct from "../src/components/SingleProduct";
 import UserProfile from "./components/UserProfile";
+import ProductForm from "./components/ProductForm";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route exact path="/singleproduct">
           <SingleProduct />
+        </Route>
+        <Route exact path="/productform">
+          <ProductForm />
         </Route>
 
         <Route exact path="/products/:id" children={<SingleProduct />} />

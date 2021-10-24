@@ -12,4 +12,5 @@ export const queryKeys = {
     authuser: "authuser",
     areas: "areas",
     deliveryperiod: "deliveryperiod",
+    category: "category",
 };

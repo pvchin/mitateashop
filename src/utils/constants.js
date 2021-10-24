@@ -8,6 +8,7 @@ export const orders_url = "/api/orders";
 export const orderitems_url = "/api/orderitems";
 export const orderaddon_url = "/api/orderaddon";
 export const areas_url = "/api/areas";
+export const category_url = "/api/category";
 export const deliveryperiod_url = "/api/deliveryperiod";
 export const document_url = "/api/document";
 export const images_url =

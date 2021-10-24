@@ -73,16 +73,17 @@ import {
 } from "@chakra-ui/react";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
-import { useDeliveryPeriod } from "../react-query/deliveryperiod/useDeliveryPeriod";
-import { useAddDeliveryPeriod } from "../react-query/deliveryperiod/useCreateDeliveryPeriod";
-import { useUpdateDeliveryPeriod } from "../react-query/deliveryperiod/useUpdateDeliveryPeriod";
-import { useDeleteDeliveryPeriod } from "../react-query/deliveryperiod/useDeleteDeliveryPeriod";
+import { useCategory } from "../react-query/category/useCategory";
+import { useAddCategory } from "../react-query/category/useCreateCategory";
+import { useUpdateCategory } from "../react-query/category/useUpdateCategory";
+import { useDeleteCategory } from "../react-query/category/useDeleteCategory";
 
 const columns = [
   {
-    title: "Period",
-    field: "period",
+    title: "Category",
+    field: "name",
   },
+ 
 ];
 
 const tableIcons = {
@@ -109,26 +110,25 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-const DeliveryPeriodTable = () => {
-    const { deliveryperiod } = useDeliveryPeriod();
-    const addDeliveryPeriod = useAddDeliveryPeriod()
-    const updateDeliveryPeriod = useUpdateDeliveryPeriod()
-    const deleteDeliveryPeriod = useDeleteDeliveryPeriod()
+const CategoryTable = () => {
+  const { category } = useCategory();
+  const addCategory = useAddCategory();
+  const updateCategory = useUpdateCategory();
+  const deleteCategory = useDeleteCategory();
 
-
-  const update_DeliveryPeriod = (data) => {
+  const update_Category = (data) => {
     const { id, rec_id, ...fields } = data;
-    updateDeliveryPeriod({ id,  ...fields });
+    updateCategory({ id, ...fields });
   };
 
-  const add_DeliveryPeriod = (data) => {
+  const add_Category = (data) => {
     const { ...fields } = data;
-    addDeliveryPeriod({ ...fields });
+    addCategory({ ...fields });
   };
 
-  const delete_DeliveryPeriod = (data) => {
+  const delete_Category = (data) => {
     const { id } = data;
-    deleteDeliveryPeriod(id);
+    deleteCategory(id);
   };
 
   return (
@@ -136,28 +136,28 @@ const DeliveryPeriodTable = () => {
       <Box w="600px">
         <MaterialTable
           columns={columns}
-          data={deliveryperiod}
-          title="Times Period"
+          data={category}
+          title="Category"
           icons={tableIcons}
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  add_DeliveryPeriod(newData);
+                  add_Category(newData);
                   resolve();
                 }, 1000);
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  update_DeliveryPeriod(newData);
+                  update_Category(newData);
                   resolve();
                 }, 1000);
               }),
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  delete_DeliveryPeriod(oldData);
+                  delete_Category(oldData);
                   resolve();
                 }, 1000);
               }),
@@ -177,4 +177,4 @@ const DeliveryPeriodTable = () => {
   );
 };
 
-export default DeliveryPeriodTable;
+export default CategoryTable;

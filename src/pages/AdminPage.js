@@ -10,10 +10,10 @@ import AdminMain from "../components/AdminMain";
 const AdminPage = () => {
   return (
     <main>
-      <PageHero title="cart" />
-      <Wrapper className="page">
+      {/* <PageHero title="admin" /> */}
+      {/* <Wrapper className="page"> */}
         <AdminMain />
-      </Wrapper>
+      {/* </Wrapper> */}
     </main>
   );
 };

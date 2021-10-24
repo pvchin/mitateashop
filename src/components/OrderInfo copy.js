@@ -56,20 +56,11 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import { createLocalStorageStateHook } from "use-local-storage-state";
-import { carts_localstorage_key } from "../utils/constants";
 import { currentorderState } from "../data/atomdata";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { useAreas } from "../react-query/area/useAreas";
 import { useDeliveryPeriod } from "../react-query/deliveryperiod/useDeliveryPeriod";
 import { useOrders } from "../react-query/orders/useOrders";
-import { useAddOrders } from "../react-query/orders/useCreateOrders";
-import { useOrderItems } from "../react-query/orderitems/useOrderItems";
-import { useAddOrderItems } from "../react-query/orderitems/useCreateOrderItems";
-import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
-import { useAddOrderAddon } from "../react-query/orderaddon/useCreateOrderAddon";
-import { useDocument } from "../react-query/document/useDocument";
-import { useUpdateDocument } from "../react-query/document/useUpdateDocument";
 
 const initial_order = [
   {
@@ -99,14 +90,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.50");
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
   const field_width = "90";
-  const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
-  const [mcarts, setMCarts, { removeItem }] = useMCarts();
   const { orders, setOrderId, setOrderNo } = useOrders();
-  const addOrders = useAddOrders();
-  const addOrderItems = useAddOrderItems();
-  const addOrderAddon = useAddOrderAddon();
-  const updateDocument = useUpdateDocument();
-  const { document } = useDocument();
   const { areas } = useAreas();
   const { deliveryperiod } = useDeliveryPeriod();
   const [currentorder, setCurrentOrder] = useRecoilState(currentorderState);
@@ -168,17 +152,11 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         //alert(JSON.stringify(values, null, 2));
-        //  const totalamount = mcarts.reduce((acc, rec) => {
-        //    return (
-        //      acc + Math.round((rec.totalprice + Number.EPSILON) * 100) / 100
-        //    );
-        //  }, 0);
-        // generate new order no
-        const newOrderNo = parseFloat(document[0].orderno) + 1;
-        updateDocument({ id: document[0].id, orderno: newOrderNo.toString() });
+        console.log("orders", orders);
+        console.log("order values", values);
+        const id = orders && orders[0].id;
         const {
-          email,
-          custname,
+          name,
           phone,
           address1,
           address2,
@@ -193,62 +171,24 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
           remark,
         } = values;
 
-        // save order header
-        addOrders({
-          orderno: newOrderNo.toString(),
-          email: email,
-          custname: custname,
+        updateOrders({
+          id: id,
+          name: name,
+          custname: name,
           phone: phone,
           address1: address1,
           address2: address2,
-          grossamount: grossamount,
-          deliveryfee: deliveryfee,
-          nettamount: nettamount,
           deliverymode: deliverymode,
           paymentmode: paymentmode,
           area: area,
           requestdate: requestdate,
           requesttime: requesttime,
+          grossamount: currentorder.grossamount,
+          nettamount: currentorder.nettamount,
+          deliveryfee: currentorder.deliveryfee,
           remark: remark,
           status: statustype,
         });
-
-        mcarts &&
-          mcarts.forEach((rec) => {
-            const { addon } = rec;
-            const toppings = addon;
-
-            addOrderItems({
-              orderno: newOrderNo.toString(),
-              orderitemid: rec.id,
-              itemid: rec.itemid,
-              name: rec.name,
-              price: rec.price,
-              nettprice: rec.nettprice,
-              qty: rec.qty,
-              image: rec.image,
-              totalprice: rec.totalprice,
-              sugarlevel: rec.sugarlevel,
-              icelevel: rec.icelevel,
-              mprice: rec.mprice,
-              lprice: rec.lprice,
-              size: rec.size,
-            });
-
-            toppings
-              .filter((r) => r.checked === true)
-              .forEach((item) => {
-                addOrderAddon({
-                  orderno: newOrderNo.toString(),
-                  orderitemid: rec.id,
-                  name: item.name,
-                  description: item.description,
-                  price: item.price,
-                  checked: item.checked,
-                });
-              });
-          });
-        removeItem()
         toast({
           title: "Your Order being saved!",
           status: "success",

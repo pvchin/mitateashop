@@ -137,7 +137,7 @@ const AreasTable = () => {
 
   return (
     <VStack>
-      <Box w="600px">
+      <Box w="600px" align="center">
         <MaterialTable
           columns={columns}
           data={areas}
@@ -167,7 +167,7 @@ const AreasTable = () => {
               }),
           }}
           options={{
-            pageSize: 10,
+            pageSize: 5,
             filtering: true,
             headerStyle: {
               backgroundColor: "#9AE6B4",

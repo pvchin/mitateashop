@@ -172,7 +172,7 @@ const ToppingsTable = () => {
               }),
           }}
           options={{
-            pageSize: 10,
+            pageSize: 5,
             filtering: true,
             headerStyle: {
               backgroundColor: "#9AE6B4",

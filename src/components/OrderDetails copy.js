@@ -26,7 +26,7 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
   const totalamount = orderdetails.reduce((acc, rec) => {
     return acc + Math.round((rec.totalprice + Number.EPSILON) * 100) / 100;
   }, 0);
-  console.log("orderdetails", orderdetails, orderaddon);
+
   return (
     <Box w="full">
       <List>

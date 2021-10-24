@@ -608,9 +608,9 @@ const CheckoutPage = () => {
           >
             <VStack alignItems="flex-start" spacing={3}>
               <Heading size="2x1">Your cart</Heading>
-              {/* <Heading fontFamily="cursive" color="green" size="md">
+              <Heading fontFamily="cursive" color="green" size="md">
                 order no {order.orderno}
-              </Heading> */}
+              </Heading>
             </VStack>
             <HStack spacing="6" alignItems="center" w="full">
               <Stack
@@ -623,10 +623,8 @@ const CheckoutPage = () => {
                 overflowY="scroll"
               >
                 <OrderDetails
-                  // orderdetails={orderitems}
-                  // orderaddon={orderaddon}
-                  orderdetails={mcarts}
-                  orderaddon={mcarts}
+                  orderdetails={orderitems}
+                  orderaddon={orderaddon}
                 />
               </Stack>
             </HStack>

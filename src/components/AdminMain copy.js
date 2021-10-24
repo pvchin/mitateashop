@@ -64,7 +64,6 @@ import AreasTable from "./AreasTable";
 import CategoryTable from "./CategoryTable";
 import DeliveryPeriodTable from "./DeliveryPeriodTable";
 import ToppingsTable from "./ToppingsTable";
-import AdminSidebar from "./AdminSidebar";
 
 const confirm_columns = [
   {
@@ -157,47 +156,118 @@ const tableIcons = {
 };
 const AdminMain = () => {
   const toast = useCustomToast();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
   const { orders, setOrderId } = useOrders();
   const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
   const { orderitems, setOrderItemId } = useOrderItems();
   const { orderaddon, setOrderAddonId } = useOrderAddon();
   const [currentorder, setCurrentOrder] = useState({});
-  const [select, setSelect] = useState("");
   const updateOrder = useUpdateOrders();
 
-  const SwitchCase = () => {
-    switch (select) {
-      case "confirmorders":
-        return <AdminOrdersHistory status="confirm" />;
-      case "deliveryorders":
-        return <AdminOrdersHistory status="delivery" />;
-      case "deletedorders":
-        return <AdminOrdersHistory status="deleted" />;
-      case "items":
-        return <ItemsTable />;
-      case "category":
-        return <CategoryTable />;
-      case "deliveryperiod":
-        return <DeliveryPeriodTable />;
-      case "area":
-        return <AreasTable />;
-      case "toppings":
-        return <ToppingsTable />;
-      default:
-        return "You are not authorised user!";
-    }
-  };
-
   return (
-    <Flex w="100%" h="600" overflow="scroll">
-      <AdminSidebar setSelect={setSelect} />
-      <Flex mt={50} w="full" h="100%" justify="center">
-        <SwitchCase />
+    <Container>
+      <Flex
+        h={{ base: "auto", md: "120vh" }}
+        py={[0, 0, 0]}
+        direction={{ base: "column-reverse", md: "row" }}
+      >
+        <VStack w="full" h="full" p="10" spacing="10" alignItems="center">
+          {/* <Box align="center">
+            <Heading size="lg">Admin</Heading>
+          </Box> */}
+          <Box align="center" w={{ base: "auto", md: "300vh" }}>
+            <Tabs align="center" defaultIndex={1} isLazy>
+              <TabList>
+                <Tab>Items</Tab>
+                <Tab>Orders</Tab>
+                <Tab>Areas</Tab>
+                <Tab>Category</Tab>
+                <Tab>Delivery Period</Tab>
+                <Tab>Toppings</Tab>
+              </TabList>
+
+              <TabPanels>
+                <TabPanel>
+                  <Box w="80%">
+                    <ItemsTable />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <AdminOrdersHistory />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <AreasTable />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <CategoryTable />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <DeliveryPeriodTable />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box w="80%">
+                    <ToppingsTable />
+                  </Box>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+        </VStack>
       </Flex>
-    </Flex>
+    </Container>
   );
 };
+
+// const Wrapper = styled.section`
+//   .main {
+//     height: 600px;
+//   }
+//   img {
+//     width: 100%;
+//     display: block;
+//     border-radius: var(--radius);
+//     object-fit: cover;
+//   }
+//   .gallery {
+//     margin-top: 1rem;
+//     display: grid;
+//     grid-template-columns: repeat(5, 1fr);
+//     column-gap: 1rem;
+//     img {
+//       height: 100px;
+//       cursor: pointer;
+//     }
+//   }
+//   .active {
+//     border: 2px solid var(--clr-primary-5);
+//   }
+//   @media (max-width: 576px) {
+//     .main {
+//       height: 300px;
+//     }
+//     .gallery {
+//       img {
+//         height: 50px;
+//       }
+//     }
+//   }
+//   @media (min-width: 992px) {
+//     .main {
+//       height: 500px;
+//     }
+//     .gallery {
+//       img {
+//         height: 75px;
+//       }
+//     }
+//   }
+// `;
 
 export default AdminMain;

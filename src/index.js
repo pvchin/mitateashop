@@ -45,6 +45,7 @@ ReactDOM.render(
       <ReactQueryDevtools />
     </QueryClientProvider>
   </ChakraProvider>,
-  //document.getElementById("root")
-  (document.getElementById("root").style.transform = "scale(1)")
+  document.getElementById("root")
+  //(document.getElementById("root").style.zoom =
+  //  window.innerWidth / window.outerWidth)
 );

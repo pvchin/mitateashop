@@ -7,7 +7,6 @@ import axios from "axios";
 import { queryKeys } from "../constants";
 
 async function getOrders(orderId, orderNo) {
-  //const { data } = await axios.get(`${items_url}`);
   const { data } = await axios.get(`${orders_url}?em=${orderId}&od=${orderNo}`);
   return data;
 }
@@ -28,6 +27,9 @@ export function useOrders() {
     () => getOrders(orderId, orderNo),
     {
       select: filter !== "all" ? selectFn : undefined,
+    },
+    {
+      refetchOnWindowFocus: false,
     }
   );
 

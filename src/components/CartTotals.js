@@ -106,7 +106,7 @@ const CartTotals = ({ items }) => {
       paymentmode: "bank",
       area: users.length > 0 ? users[0].area : "",
       requestdate: dayjs().format("YYYY-MM-DD"),
-      //requesttime: "",
+      requesttime: "10am to 11am",
       status: "Pending",
     };
     setOrder(orderdata);
