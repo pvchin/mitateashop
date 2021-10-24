@@ -333,7 +333,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
   return (
     <Container maxWidth="container.xl" padding={0}>
       <Flex
-        h={{ base: "auto", md: "170vh" }}
+        h={{ base: "auto", md: "160vh" }}
         py={[0, 0, 0]}
         direction={{ base: "column-reverse", md: "row" }}
         overflowY="scroll"
