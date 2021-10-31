@@ -13,7 +13,7 @@ const OrderPage = () => {
   
   return (
     <main>
-      <PageHero title="cart" />
+      <PageHero title="my orders" />
       <Wrapper className="page">
         <UserOrdersHistory />
       </Wrapper>

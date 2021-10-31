@@ -7,6 +7,7 @@ import {
   AspectRatio,
   Box,
   Button,
+  Heading,
   Image,
   VStack,
   Wrap,
@@ -21,7 +22,7 @@ const ListView = ({ products }) => {
   const history = useHistory();
   const [orderitem, setOrderItem] = useRecoilState(orderItemState);
 
-  const AddToCart = (e, { product } ) => {
+  const AddToCart = (e, { product }) => {
     e.preventDefault();
     console.log("listview", product);
     const { id, image, name, price, mprice, lprice, size } = product;
@@ -52,6 +53,8 @@ const ListView = ({ products }) => {
               src={`${images_url}${image}`}
               alt={name}
               fallbackSrc="https://via.placeholder.com/150"
+              boxSize="300px"
+              objectFit="fill"
             />
             {/* <AspectRatio maxW="280px" ratio={1}>
               <Wrap px="1rem" spacing={4} justify="center">
@@ -74,8 +77,8 @@ const ListView = ({ products }) => {
             </AspectRatio> */}
             <VStack>
               <div>
-                <h4>{name}</h4>
-                <h5 className="price">{formatPrice(price)}</h5>
+                <Heading size="md">{name}</Heading>
+                <Heading className="price">{formatPrice(price)}</Heading>
               </div>
               {/* <p>{description.substring(0, 150)}</p> */}
               <Box align="center" mt={1}>

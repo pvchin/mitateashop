@@ -25,6 +25,7 @@ import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { useCarts } from "../react-query/carts/useCarts";
 import { useAuthUser } from "../react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
 import Signin from "./Signin";
 
 const CartButtons = () => {
@@ -33,6 +34,7 @@ const CartButtons = () => {
   const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
   const [mcarts, setMCarts, { removeItem }] = useMCarts();
   const { authuser, updateAuthUser, clearAuthUser } = useAuthUser();
+  const { users, setUserId } = useUsers();
   const { closeSidebar } = useProductsContext();
   const { total_items } = useCartContext();
   //const { loginWithRedirect, myUser, logout } = useUserContext();
@@ -40,8 +42,8 @@ const CartButtons = () => {
   const [isLoad, setIsLoad] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   // console.log("totalitems", totalitems);
-  console.log("authuser", authuser ? authuser : "none");
-  console.log("authuser length", authuser ? authuser.length : 0);
+  //console.log("authuser", authuser ? authuser : "none");
+  //console.log("authuser length", authuser ? authuser.length : 0);
 
   useEffect(() => {
     if (mcarts) {
@@ -49,6 +51,12 @@ const CartButtons = () => {
       setIsLoad(false);
     }
   }, [isLoad]);
+
+  useEffect(() => {
+    if (authuser && authuser.length > 0) {
+      setUserId(authuser[0].email);
+    }
+  }, [authuser]);
 
   const handleSignin = () => {
     history.push("/signin");

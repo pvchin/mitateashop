@@ -50,11 +50,11 @@ import { useAddCarts } from "../react-query/carts/useCreateCarts";
 const SingleProduct = () => {
   //const { id } = useParams();
   const history = useHistory();
-   const queryClient = useQueryClient();
-  const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
-  const [mcarts, setMCarts] = useMCarts();
+  const queryClient = useQueryClient();
+  //const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
+  //const [mcarts, setMCarts] = useMCarts();
   const [totalItems, setTotalItems] = useRecoilState(cartsTotalItemsState);
-  const { carts } = useCarts();
+  const { carts, updateCarts } = useCarts();
   const addCart = useAddCarts();
   const { toppings, setToppingId } = useToppings();
   const { orderitems, setOrderItemId } = useOrderItems();
@@ -117,10 +117,11 @@ const SingleProduct = () => {
   };
 
   const Update_OrderItem = () => {
-    const newdata = [...mcarts, orderitem];
+    const newdata = [...carts, orderitem];
     //addCart(orderitem);
-    setMCarts(newdata);
-    queryClient.invalidateQueries("carts");
+    //setMCarts(newdata);
+    //queryClient.invalidateQueries("carts");
+    updateCarts(newdata)
     setTotalItems((prev) => (prev = newdata.length));
   };
 
@@ -231,16 +232,17 @@ const SingleProduct = () => {
               //border="1px solid blue"
             >
               <GridItem colSpan={1} align="center">
-                <Box boxSize="lg" h="500px">
-                  <AspectRatio maxW="md" ratio={1}>
-                    <Image
-                      src={`${images_url}${image}`}
-                      alt={name}
-                      boxSize="100%"
-                      objectFit="cover"
-                    />
-                  </AspectRatio>
-                </Box>
+                {/* <Box boxSize="lg" h="500px"> */}
+                {/* <AspectRatio maxW="md" ratio={1}> */}
+                <Image
+                  src={`${images_url}${image}`}
+                  fallbackSrc="https://via.placeholder.com/250"
+                  alt={name}
+                  boxSize="500px"
+                  objectFit="contain"
+                />
+                {/* </AspectRatio> */}
+                {/* </Box> */}
               </GridItem>
               <GridItem colSpan={1} bg="gray.100">
                 <Box p={5} mb={50}>

@@ -7,6 +7,7 @@ import { links } from "../utils/constants";
 import styled from "styled-components";
 import CartButtons from "./CartButtons";
 import { useUserContext } from "../context/user_context";
+import { useAuthUser } from "../react-query/auth/useAuthUser";
 import { useRecoilState } from "recoil";
 import { isSidebarOpenState } from "../data/atomdata";
 
@@ -14,6 +15,7 @@ const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
   //const [isSidebarOpen, setIsSidebarOpen] = useRecoilState(isSidebarOpenState);
   const { myUser } = useUserContext();
+  const { authuser} = useAuthUser()
 
   return (
     <SidebarContainer>
@@ -22,11 +24,7 @@ const Sidebar = () => {
       >
         <div className="sidebar-header">
           <img src={logo} className="logo" alt="mita tea shop" />
-          <button
-            type="button"
-            className="close-btn"
-            onClick={closeSidebar}
-          >
+          <button type="button" className="close-btn" onClick={closeSidebar}>
             <FaTimes />
           </button>
         </div>
@@ -40,10 +38,13 @@ const Sidebar = () => {
               </li>
             );
           })}
-          {myUser && (
+          {authuser && authuser.length > 0 && (
             <li>
               <Link to="/checkout" onClick={closeSidebar}>
                 checkout
+              </Link>
+              <Link to="/myorders" onClick={closeSidebar}>
+                my orders
               </Link>
             </li>
           )}

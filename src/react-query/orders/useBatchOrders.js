@@ -6,15 +6,14 @@ import { filterById } from "./utils";
 import axios from "axios";
 import { queryKeys } from "../constants";
 
-async function getSingleOrders(singleorderNo) {
-  //const { data } = await axios.get(`${items_url}`);
-  const { data } = await axios.get(`${orders_url}?no=${singleorderNo}`);
+async function getOrders(batchId) {
+  const { data } = await axios.get(`${orders_url}?st=${batchId}`);
   return data;
 }
 
-export function useSingleOrder() {
+export function useBatchOrders() {
   const [filter, setFilter] = useState("all");
-  const [singleorderNo, setSingleOrderNo] = useState("");
+  const [batchId, setBatchId] = useState("");
 
   const selectFn = useCallback(
     (unfiltered) => filterById(unfiltered, filter),
@@ -22,13 +21,16 @@ export function useSingleOrder() {
   );
 
   const fallback = [];
-  const { data: singleorder = fallback } = useQuery(
-    [queryKeys.singleorder, singleorderNo],
-    () => getSingleOrders(singleorderNo),
+  const { data: batchorders = fallback } = useQuery(
+    [queryKeys.batchorders, batchId],
+    () => getOrders(batchId),
     {
       select: filter !== "all" ? selectFn : undefined,
+    },
+    {
+      refetchOnWindowFocus: false,
     }
   );
 
-  return { singleorder, filter, setFilter, setSingleOrderNo };
+  return { batchorders, filter, setFilter, setBatchId };
 }

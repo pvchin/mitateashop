@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { items_url, carts_localstorage_key } from "../../utils/constants";
 import { filterByItemId } from "./utils";
 import { createLocalStorageStateHook } from "use-local-storage-state";
@@ -12,7 +12,8 @@ export function useCarts() {
   const [itemId, setItemId] = useState("");
   const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
   const [mcarts, setMCarts, { removeItem }] = useMCarts();
-
+  const queryClient = useQueryClient();
+  
   const selectFn = useCallback(
     (unfiltered) => filterByItemId(unfiltered, filter),
     [filter]
@@ -32,9 +33,16 @@ export function useCarts() {
     return data;
   }
 
+  function updateCarts(data) {
+    
+    setMCarts(data);
+    queryClient.setQueryData(queryKeys.carts, data);
+    //queryClient.invalidateQueries("users");
+  }
+
   function clearCarts() {
     removeItem();
   }
 
-  return { carts, filter, setFilter, setItemId, clearCarts };
+  return { carts, filter, setFilter, setItemId, updateCarts, clearCarts };
 }

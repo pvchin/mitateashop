@@ -133,7 +133,7 @@ const CategoryTable = () => {
 
   return (
     <VStack>
-      <Box w="600px">
+      <Box w="600px" overflow="scroll">
         <MaterialTable
           columns={columns}
           data={category}
@@ -164,7 +164,8 @@ const CategoryTable = () => {
           }}
           options={{
             pageSize: 5,
-            filtering: true,
+              filtering: true,
+            paging: false,
             headerStyle: {
               backgroundColor: "#9AE6B4",
               color: "black",

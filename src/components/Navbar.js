@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../assets/MitaLogo.jpg";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
 import { useProductsContext } from "../context/products_context";
 import { useUserContext } from "../context/user_context";
+import { useAuthUser } from "../react-query/auth/useAuthUser";
+import { useUsers } from "../react-query/users/useUsers";
 import { useRecoilState } from "recoil";
 import { isSidebarOpenState } from "../data/atomdata";
 
@@ -15,6 +17,8 @@ const Nav = () => {
   //const [isSidebarOpen, setIsSidebarOpen] = useRecoilState(isSidebarOpenState);
   const { openSidebar } = useProductsContext();
   const { myUser } = useUserContext();
+  const { authuser } = useAuthUser();
+  const { users } = useUsers();
 
   return (
     <NavContainer>
@@ -23,11 +27,7 @@ const Nav = () => {
           <Link to="/">
             <img src={logo} alt="mita tea shop" />
           </Link>
-          <button
-            type="button"
-            className="nav-toggle"
-            onClick={openSidebar}
-          >
+          <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars />
           </button>
         </div>
@@ -36,19 +36,36 @@ const Nav = () => {
             const { id, text, url } = link;
             return (
               <li key={id}>
-                <Link to={url}>
-                  <Heading as="h4" size="md">
+                <Heading as="h4" size="md">
+                  <Link to={url} href="#">
                     {text}
-                  </Heading>
-                </Link>
+                  </Link>
+                </Heading>
               </li>
             );
           })}
-          {myUser && (
-            <li>
-              <Link to="/checkout">checkout</Link>
-            </li>
+          {authuser && authuser.length > 0 && (
+            <Heading as="h4" size="md">
+              <li>
+                <Link to="/myorders">My Orders</Link>
+                <Link to="/checkout">Checkout</Link>
+                {users &&
+                  users.length > 0 &&
+                  users[0].role === "1" &&
+                  users[0].email === authuser[0].email && (
+                    <Link to="/admin">Admin</Link>
+                  )}
+              </li>
+            </Heading>
           )}
+          {/* { authuser && authuser.length > 0 &&
+            users && users.length > 0 &&
+            users[0].email === authuser.email &&
+            users[0].role === "1" && (
+              <li>
+                <Link to="/admin">Admin</Link>
+              </li>
+            )} */}
         </ul>
         <CartButtons />
       </div>

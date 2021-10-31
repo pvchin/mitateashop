@@ -126,7 +126,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
     onOpen: onConfirmOrderOpen,
     onClose: onConfirmOrderClose,
   } = useDisclosure();
-  console.log("checkout", currentorder);
+  //console.log("checkout", currentorder);
   const {
     orderno,
     email,
@@ -178,102 +178,102 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
   }, [order]);
 
   function onSubmit(values, statustype) {
-    //return new Promise((resolve) => {
-    //setTimeout(() => {
-    if (statustype === "Confirmed") {
-      // generate new order no
-      const newOrderNo = parseFloat(document[0].orderno) + 1;
-      setNewOrderNo((Prev) => (Prev = newOrderNo));
-      updateDocument({
-        id: document[0].id,
-        orderno: newOrderNo.toString(),
-      });
-      const {
-        email,
-        custname,
-        phone,
-        address1,
-        address2,
-        area,
-        deliverymode,
-        paymentmode,
-        requestdate,
-        requesttime,
-        grossamount,
-        nettamount,
-        deliveryfee,
-        remark,
-      } = values;
-
-      // save order header
-      addOrders({
-        orderno: newOrderNo.toString(),
-        email: email,
-        custname: custname,
-        phone: phone,
-        address1: address1,
-        address2: address2,
-        grossamount: grossamount,
-        deliveryfee: deliveryfee,
-        nettamount: nettamount,
-        deliverymode: deliverymode,
-        paymentmode: paymentmode,
-        area: area,
-        requestdate: requestdate,
-        requesttime: requesttime,
-        remark: remark,
-        status: statustype,
-      });
-
-      mcarts &&
-        mcarts.forEach((rec) => {
-          const { addon } = rec;
-          const toppings = addon;
-
-          addOrderItems({
+    return new Promise((resolve) => {
+      //setTimeout(() => {
+        if (statustype === "Confirmed") {
+          // generate new order no
+          const newOrderNo = parseFloat(document[0].orderno) + 1;
+          setNewOrderNo((Prev) => (Prev = newOrderNo));
+          updateDocument({
+            id: document[0].id,
             orderno: newOrderNo.toString(),
-            orderitemid: rec.id,
-            itemid: rec.itemid,
-            name: rec.name,
-            price: rec.price,
-            nettprice: rec.nettprice,
-            qty: rec.qty,
-            image: rec.image,
-            totalprice: rec.totalprice,
-            sugarlevel: rec.sugarlevel,
-            icelevel: rec.icelevel,
-            mprice: rec.mprice,
-            lprice: rec.lprice,
-            size: rec.size,
+          });
+          const {
+            email,
+            custname,
+            phone,
+            address1,
+            address2,
+            area,
+            deliverymode,
+            paymentmode,
+            requestdate,
+            requesttime,
+            grossamount,
+            nettamount,
+            deliveryfee,
+            remark,
+          } = values;
+
+          // save order header
+          addOrders({
+            orderno: newOrderNo.toString(),
+            email: email,
+            custname: custname,
+            phone: phone,
+            address1: address1,
+            address2: address2,
+            grossamount: grossamount,
+            deliveryfee: deliveryfee,
+            nettamount: nettamount,
+            deliverymode: deliverymode,
+            paymentmode: paymentmode,
+            area: area,
+            requestdate: requestdate,
+            requesttime: requesttime,
+            remark: remark,
+            status: statustype,
           });
 
-          toppings
-            .filter((r) => r.checked === true)
-            .forEach((item) => {
-              addOrderAddon({
+          mcarts &&
+            mcarts.forEach((rec) => {
+              const { addon } = rec;
+              const toppings = addon;
+
+              addOrderItems({
                 orderno: newOrderNo.toString(),
                 orderitemid: rec.id,
-                name: item.name,
-                description: item.description,
-                price: item.price,
-                checked: item.checked,
+                itemid: rec.itemid,
+                name: rec.name,
+                price: rec.price,
+                nettprice: rec.nettprice,
+                qty: rec.qty,
+                image: rec.image,
+                totalprice: rec.totalprice,
+                sugarlevel: rec.sugarlevel,
+                icelevel: rec.icelevel,
+                mprice: rec.mprice,
+                lprice: rec.lprice,
+                size: rec.size,
               });
+
+              toppings
+                .filter((r) => r.checked === true)
+                .forEach((item) => {
+                  addOrderAddon({
+                    orderno: newOrderNo.toString(),
+                    orderitemid: rec.id,
+                    name: item.name,
+                    description: item.description,
+                    price: item.price,
+                    checked: item.checked,
+                  });
+                });
             });
-        });
-      clearCarts();
-      // toast({
-      //   title: "Your Order being saved!",
-      //   status: "success",
-      // });
-      //resolve();
-      onConfirmOrderOpen();
-      history.push("/userorders");
-    }
-    if (statustype === "Pending") {
-      history.push("/products");
-    }
-    //}, 3000);
-    //});
+          clearCarts();
+          // toast({
+          //   title: "Your Order being saved!",
+          //   status: "success",
+          // });
+          //resolve();
+          onConfirmOrderOpen();
+          //history.push("/userorders");
+        }
+        if (statustype === "Pending") {
+          history.push("/products");
+        }
+      //}, 3000);
+    });
   }
 
   const onPrintSubmit = (values) => {
@@ -995,8 +995,8 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
             </SimpleGrid>
           </form>
           <Modal
-            //w="500px"
-            //h="200px"
+            w="500px"
+            h="200px"
             isOpen={isConfirmOrderOpen}
             onClose={onConfirmOrderClose}
             closeOnOverlayClick={false}
@@ -1010,11 +1010,12 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                   <OrderConfirm neworderno={neworderno} />
                 </HStack>
               </ModalBody>
+
               {/* <ModalFooter>
-                <Button colorScheme="blue" mr={3} onClick={onConfirmOrderClose}>
-                  Close
-                </Button>
-              </ModalFooter> */}
+              <Button colorScheme="blue" mr={3} onClick={onDeliverOrderClose}>
+              Submit
+              </Button>
+            </ModalFooter> */}
             </ModalContent>
           </Modal>
         </VStack>

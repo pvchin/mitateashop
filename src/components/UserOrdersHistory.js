@@ -210,8 +210,8 @@ const tableIcons = {
 
 const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
   const toast = useCustomToast();
-  const { orders, setOrderId } = useOrders();
-  const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
+  const { orders, setOrderId, setOrderNo } = useOrders();
+  const { singleorder, setSingleOrderNo } = useSingleOrder();
   const { orderitems, setOrderItemId } = useOrderItems();
   const { orderaddon, setOrderAddonId } = useOrderAddon();
   const updateOrders = useUpdateOrders();
@@ -232,7 +232,7 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
     onClose: onAlertDeleteClose,
   } = useDisclosure();
   const [currentorder, setCurrentOrder] = useRecoilState(currentorderState);
-  const [orderno, setOrderNo] = useControllableState("");
+  //const [orderno, setOrderNo] = useControllableState("");
   const [main, setMain] = useState(images[0]);
 
   const tableRef = React.createRef();
@@ -242,9 +242,8 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
   }, []);
 
   const handleViewOrder = (rowData) => {
-    const { email, orderno } = rowData;
+    const { id, email, orderno } = rowData;
     //setOrderNo(orderno);
-    setSingleOrderId(email);
     setSingleOrderNo(orderno);
     setOrderItemId(orderno);
     setOrderAddonId(orderno);
@@ -272,7 +271,6 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
       nettamount: nettamount,
       deliveryfee: deliveryfee,
     });
-    setSingleOrderId(email);
     setSingleOrderNo(orderno);
     setOrderItemId(orderno);
     setOrderAddonId(orderno);
@@ -320,68 +318,16 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
     <Wrapper>
       <Box>
         <Box align="center">
-          <Heading>Orders History</Heading>
+          <Heading>My Orders History</Heading>
         </Box>
         <Box align="center">
           <Tabs align="center" isLazy>
             <TabList>
-              <Tab>Pending</Tab>
               <Tab>Confirmed</Tab>
-              <Tab>Deleted</Tab>
               <Tab>Delivered</Tab>
             </TabList>
 
             <TabPanels>
-              <TabPanel>
-                <Box w="80%">
-                  <MaterialTable
-                    columns={confirm_columns}
-                    data={
-                      orders &&
-                      orders
-                        .filter(
-                          (r) =>
-                            r.email === authuser[0].email &&
-                            r.status === "Pending"
-                        )
-                        .map((rec) => {
-                          return { ...rec };
-                        })
-                    }
-                    title="Orders Tables"
-                    icons={tableIcons}
-                    actions={[
-                      (rowData) => ({
-                        //disabled: rowData.status !== "Pending",
-                        icon: () => <AiFillEdit size="30px" />,
-                        tooltip: "Edit Record",
-                        onClick: (event, rowData) => {
-                          handleEditOrder(rowData);
-                        },
-                      }),
-                      (rowData) => ({
-                        //disabled: rowData.status !== "Pending",
-                        icon: () => <AiFillDelete />,
-                        tooltip: "Delete Record",
-                        onClick: (event, rowData) => {
-                          handleDeleteOrder(rowData);
-                        },
-                      }),
-                    ]}
-                    options={{
-                      filtering: false,
-                      search: false,
-                      toolbar: false,
-                      headerStyle: {
-                        backgroundColor: "#9AE6B4",
-                        color: "black",
-                        fontWeight: "bold",
-                      },
-                      showTitle: false,
-                    }}
-                  />
-                </Box>
-              </TabPanel>
               <TabPanel>
                 <Box w="80%">
                   <MaterialTable
@@ -421,45 +367,7 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
                   />
                 </Box>
               </TabPanel>
-              <TabPanel>
-                <Box w="80%">
-                  <MaterialTable
-                    columns={others_columns}
-                    data={orders
-                      .filter(
-                        (r) =>
-                          r.email === authuser[0].email &&
-                          r.status === "Deleted"
-                      )
-                      .map((rec) => {
-                        return { ...rec };
-                      })}
-                    title="Orders Tables"
-                    icons={tableIcons}
-                    actions={[
-                      (rowData) => ({
-                        //disabled: rowData.status !== "Pending",
-                        icon: () => <GrFormView size="33px" />,
-                        tooltip: "View Record",
-                        onClick: (event, rowData) => {
-                          handleViewOrder(rowData);
-                        },
-                      }),
-                    ]}
-                    options={{
-                      filtering: false,
-                      search: false,
-                      toolbar: false,
-                      headerStyle: {
-                        backgroundColor: "#9AE6B4",
-                        color: "black",
-                        fontWeight: "bold",
-                      },
-                      showTitle: false,
-                    }}
-                  />
-                </Box>
-              </TabPanel>
+
               <TabPanel>
                 <Box w="80%">
                   <MaterialTable
@@ -502,7 +410,7 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
             </TabPanels>
           </Tabs>
         </Box>
-        <Modal onClose={onViewOrderClose} size="600px" isOpen={isViewOrderOpen}>
+        <Modal onClose={onViewOrderClose} size="6xl" isOpen={isViewOrderOpen}>
           <ModalOverlay />
           <ModalContent>
             {/* <ModalHeader>Modal Title</ModalHeader> */}
@@ -510,23 +418,20 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
             <ModalBody>
               {/* <Container maxWidth="container.md" padding={0}> */}
               <Flex
-                h={{ base: "auto", md: "180vh" }}
+                h={{ base: "auto", md: "160vh" }}
                 py={[0, 10, 20]}
                 direction={{ base: "column-reverse", md: "row" }}
               >
                 <Box
                   overflowY={{ base: "scoll", md: "none" }}
-                  //h={{ base: "auto", md: "180vh" }}
+                  h={{ base: "auto", md: "160vh" }}
                 >
-                  <OrderInfoView
-                    order={[...singleorder]}
-                    onClose={onViewOrderClose}
-                  />
+                  <OrderInfoView order={[...singleorder]} />
                 </Box>
                 <VStack
-                  w={{ base: "auto", md: "50%" }}
+                  w={{ base: "auto", md: "60%" }}
                   h={{ base: "auto", md: "160vh" }}
-                  p="5"
+                  p="10"
                   spacing="10"
                   alignItems="flex-start"
                   bg="gray.50"

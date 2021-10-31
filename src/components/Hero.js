@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Heading } from "@chakra-ui/react"
-import heroBcg from "../assets/intro5.jpeg"
+import { Image, Heading } from "@chakra-ui/react";
+import heroBcg from "../assets/intro5.jpeg";
 import heroBcg2 from "../assets/slogan.jpg";
 
 const Hero = () => {
@@ -13,16 +13,26 @@ const Hero = () => {
           world best <br />
           brown sugar fresh milk
         </Heading>
-        <p>
-          Franchise from Mita Dining Group in Taiwan
-        </p>
+        <p>Franchise from Mita Dining Group in Taiwan</p>
         <Link to="/products" className="btn hero-btn">
           shop now
         </Link>
       </article>
       <article className="img-container">
-        <img src={heroBcg} alt="nice table" className="main-img" />
-        <img src={heroBcg2} alt="person working" className="accent-img" />
+        <Image
+          src={heroBcg}
+          alt="place"
+          className="main-img"
+          objectFit="cover"
+          borderRadius="30"
+        />
+        <Image
+          src={heroBcg2}
+          alt="slogan"
+          className="accent-img"
+          objectFit="cover"
+          borderRadius="50"
+        />
       </article>
     </Wrapper>
   );

@@ -144,14 +144,14 @@ const OrderInfoView = ({ order }) => {
   return (
     <Container maxWidth="container.xl" padding={0}>
       <Flex
-        h={{ base: "auto", md: "180vh" }}
+        h={{ base: "auto", md: "160vh" }}
         py={[0, 0, 0]}
         direction={{ base: "column-reverse", md: "row" }}
         overflowY="scroll"
       >
         <VStack
           w={{ base: "auto", md: "full" }}
-          h={{ base: "auto", md: "180vh" }}
+          h={{ base: "auto", md: "160vh" }}
           p="2"
           spacing="10"
           alignItems="flex-start"

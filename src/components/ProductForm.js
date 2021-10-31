@@ -221,37 +221,43 @@ export default function ProductForm({
                 </FormControl>
               </GridItem>
               <GridItem colSpan={3} rowSpan={3} mt={5}>
-                <Box p={1} boxSize="300" h="300px" align="center">
-                  <AspectRatio w="300px" h="300px" ratio={1} align="center">
-                    <Wrap
-                      w="300px"
-                      h="300px"
+                {/* <Box
+                  p={1}
+                  position="relative"
+                  boxSize={300}
+                  h={300}
+                  align="center"
+                > */}
+                {/* <AspectRatio maxW={500} ratio={1} align="center"> */}
+                  {/* <Wrap
+                      w={300}
+                      h={300}
                       px="1rem"
                       spacing={4}
                       justify="center"
-                    >
-                      <WrapItem
+                    > */}
+                  {/* <WrapItem
                         w="280px"
-                        h="280px"
+                        h="330px"
                         boxShadow="base"
                         rounded="20px"
                         overflow="hidden"
                         bg="white"
                         lineHeight="0"
                         //_hover={{ boxShadow: "dark-lg" }}
-                      >
-                        <Image
-                          src={`${images_url}${state.image}`}
-                          fallbackSrc="https://via.placeholder.com/250"
-                          alt="blank"
-                          width="100%"
-                          display="block"
-                          fit="cover"
-                        />
-                      </WrapItem>
-                    </Wrap>
-                  </AspectRatio>
-                </Box>
+                      > */}
+                  <Image
+                    boxSize="300px"
+                    src={`${images_url}${state.image}`}
+                    fallbackSrc="https://via.placeholder.com/250"
+                    alt="blank"
+                    //display="block"
+                    objectFit="cover"
+                  />
+                  {/* </WrapItem> */}
+                  {/* </Wrap> */}
+                {/* </AspectRatio> */}
+                {/* </Box> */}
               </GridItem>
               <GridItem colSpan={9} w="full">
                 <FormControl>

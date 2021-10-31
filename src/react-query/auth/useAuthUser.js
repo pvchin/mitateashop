@@ -26,7 +26,7 @@ export function useAuthUser() {
     authuser_localstorage_key,
     []
   );
-  const [mauthuser, setMAuthUser, { removeItem }] = useMAuthUser();
+  const [mauthuser, setMAuthUser] = useMAuthUser();
   const [authuser, setAuthUser] = useState(mauthuser);
   const queryClient = useQueryClient();
 
@@ -53,7 +53,8 @@ export function useAuthUser() {
     //setMAuthUser(newUser);
 
     // pre-populate user profile in React Query client
-    queryClient.setQueryData(queryKeys.user, newUser);
+    queryClient.setQueryData(queryKeys.authuser, newUser);
+    //window.location.reload();
   }
 
   // meant to be called from useAuth
@@ -63,6 +64,7 @@ export function useAuthUser() {
 
     // signout firebase
     signOut(firebase_auth);
+    window.location.reload();
 
     // remove from localstorage
     setMAuthUser([]);

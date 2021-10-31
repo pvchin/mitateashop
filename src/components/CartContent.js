@@ -11,34 +11,34 @@ import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
 import { carts_localstorage_key } from "../utils/constants";
 import { useCarts } from "../react-query/carts/useCarts";
-import { useDeleteCarts } from "../react-query/carts/useDeleteCarts";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 
 const CartContent = () => {
   //const { cart, clearCart } = useCartContext();
   const history = useHistory();
-  const { carts } = useCarts();
-  const deleteCart = useDeleteCarts();
-  const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
-  const [mcarts, setMCarts, { removeItem }] = useMCarts();
+  const { carts, updateCarts, clearCarts } = useCarts();
+
+  //const useMCarts = createLocalStorageStateHook(carts_localstorage_key, []);
+  //const [mcarts, setMCarts, { removeItem }] = useMCarts();
   const [totalItems, setTotalItems] = useRecoilState(cartsTotalItemsState);
   //const [cartitems, setCartItems] = useState([]);
   const [isLoad, setIsLoad] = useState(true);
-
-  console.log("Carts", carts);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const Delete_Item = (id) => {
-    const data = mcarts
+    const data = carts
       .filter((r) => r.id !== id)
       .map((rec) => {
         return { ...rec };
       });
-    deleteCart(id);
+    //deleteCart(id);
+    updateCarts(data);
     setTotalItems((prev) => (prev = data.length));
   };
 
   const Update_Item = (id, orderqty) => {
     const qty = orderqty;
-    const upddata = mcarts
+    const upddata = carts
       .filter((r) => r.id === id)
       .map((rec) => {
         const total =
@@ -47,14 +47,14 @@ const CartContent = () => {
         return { ...rec, qty: qty, totalprice: total };
       });
 
-    const olddata = mcarts
+    const olddata = carts
       .filter((r) => r.id !== id)
       .map((rec) => {
         return { ...rec };
       });
     const itemdata = [...olddata, ...upddata];
     console.log(itemdata);
-    setMCarts(itemdata);
+    updateCarts(itemdata);
   };
 
   const handleSaveItem = () => {
@@ -62,10 +62,22 @@ const CartContent = () => {
     history.push("/products");
   };
 
-  // useEffect(() => {
-  //   setMCarts(mcarts);
-  // }, []);
+  const handleClearItem = () => {
+    handleAlertOpen();
+  };
 
+  const handleAlertOpen = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleAlertClose = () => {
+    setIsAlertOpen(false);
+  };
+
+  const handleOnDeleteConfirm = () => {
+    clearCarts();
+    window.location.reload();
+  };
   return (
     <Wrapper className="section section-center">
       <CartColumns />
@@ -91,12 +103,20 @@ const CartContent = () => {
         <button
           type="button"
           className="link-btn clear-btn"
-          onClick={removeItem}
+          onClick={handleClearItem}
         >
           clear shopping cart
         </button>
       </div>
-      <CartTotals items={mcarts} />
+      <CartTotals items={carts} />
+      <AlertDialogBox
+        onClose={handleAlertClose}
+        onConfirm={handleOnDeleteConfirm}
+        isOpen={isAlertOpen}
+        title="Delete Item"
+      >
+        <h2>Are you sure you want to clear your cart? ?</h2>
+      </AlertDialogBox>
     </Wrapper>
   );
 };

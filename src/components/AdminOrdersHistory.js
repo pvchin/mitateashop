@@ -38,7 +38,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useOrders } from "../react-query/orders/useOrders";
+import { useBatchOrders } from "../react-query/orders/useBatchOrders";
 import { useSingleOrder } from "../react-query/orders/useSingleOrder";
 import { useOrderItems } from "../react-query/orderitems/useOrderItems";
 import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
@@ -49,6 +49,7 @@ import OrderDetails from "../components/OrderDetails";
 import OrderInfoView from "../components/OrderInfoView";
 import OrderDelivery from "../components/OrderDelivery";
 import OrderDelete from "./OrderDelete";
+import OrderReceipt from "./OrderReceipt";
 
 const confirm_columns = [
   {
@@ -204,10 +205,10 @@ const tableIcons = {
 
 const AdminOrdersHistory = ({ status }) => {
   const toast = useCustomToast();
-  const { orders, setOrderId } = useOrders();
-  // const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
-  // const { orderitems, setOrderItemId } = useOrderItems();
-  // const { orderaddon, setOrderAddonId } = useOrderAddon();
+  const { batchorders, setBatchId } = useBatchOrders();
+  const { singleorder, setSingleOrderNo } = useSingleOrder();
+  const { orderitems, setOrderItemId } = useOrderItems();
+  const { orderaddon, setOrderAddonId } = useOrderAddon();
   const [currentorder, setCurrentOrder] = useState({});
   const updateOrder = useUpdateOrders();
   const {
@@ -228,11 +229,10 @@ const AdminOrdersHistory = ({ status }) => {
 
   const handleViewOrder = (rowData) => {
     let todayDate = new Date();
-    // setCurrentOrder({ orderid: rowData.id, orderno: rowData.orderno });
-    // setSingleOrderId(rowData.email);
-    // setSingleOrderNo(rowData.orderno);
-    // setOrderItemId(rowData.orderno);
-    // setOrderAddonId(rowData.orderno);
+
+    setSingleOrderNo(rowData.orderno);
+    setOrderItemId(rowData.orderno);
+    setOrderAddonId(rowData.orderno);
     onViewOrderOpen();
   };
 
@@ -269,6 +269,10 @@ const AdminOrdersHistory = ({ status }) => {
     onDeliverOrderOpen();
   };
 
+  useEffect(() => {
+    setBatchId(status);
+  }, [status]);
+
   return (
     <Wrapper>
       <Box>
@@ -276,150 +280,67 @@ const AdminOrdersHistory = ({ status }) => {
           <Heading>Admin Orders History</Heading>
         </Box> */}
         <Box align="center">
-          {status === "confirm" && (
-            <Box w="100%">
-              <MaterialTable
-                columns={confirm_columns}
-                data={
-                  orders &&
-                  orders
-                    .filter((r) => r.status === "Confirmed")
-                    .map((rec) => {
-                      return { ...rec };
-                    })
-                }
-                title="Confirm Orders"
-                icons={tableIcons}
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: true,
-                  headerStyle: {
-                    backgroundColor: "#9AE6B4",
-                    color: "black",
-                    fontWeight: "bold",
+          <Box w="100%">
+            <MaterialTable
+              columns={confirm_columns}
+              data={batchorders}
+              title={`${status} Orders`}
+              icons={tableIcons}
+              options={{
+                filtering: false,
+                search: false,
+                toolbar: true,
+                headerStyle: {
+                  backgroundColor: "#9AE6B4",
+                  color: "black",
+                  fontWeight: "bold",
+                },
+                showTitle: true,
+              }}
+              actions={[
+                (rowData) => ({
+                  //disabled: rowData.status !== "Pending",
+                  icon: () => <GrFormView size="33px" />,
+                  tooltip: "View Order",
+                  onClick: (event, rowData) => {
+                    handleViewOrder(rowData);
                   },
-                  showTitle: true,
-                }}
-                actions={[
-                  (rowData) => ({
-                    //disabled: rowData.status !== "Pending",
-                    icon: () => <GrFormView size="33px" />,
-                    tooltip: "View Order",
-                    onClick: (event, rowData) => {
-                      handleViewOrder(rowData);
-                    },
-                  }),
-                  (rowData) => ({
-                    // disabled: rowData.status !== "Pending",
-                    icon: () => <AiFillDelete />,
-                    tooltip: "Delete Order",
-                    onClick: (event, rowData) => {
-                      handleDeleteOrder(rowData);
-                    },
-                  }),
-                  (rowData) => ({
-                    // disabled: rowData.status !== "Pending",
-                    icon: () => <GrDeliver />,
-                    tooltip: "Deliver Order",
-                    onClick: (event, rowData) => {
-                      handleDeliverOrder(rowData);
-                    },
-                  }),
-                ]}
-              />
-            </Box>
-          )}
-
-          {status === "deleted" && (
-            <Box w="100%">
-              <MaterialTable
-                columns={others_columns}
-                data={orders
-                  .filter((r) => r.status === "Deleted")
-                  .map((rec) => {
-                    return { ...rec };
-                  })}
-                title="Deleted Orders"
-                icons={tableIcons}
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: true,
-                  headerStyle: {
-                    backgroundColor: "#9AE6B4",
-                    color: "black",
-                    fontWeight: "bold",
+                }),
+                (rowData) => ({
+                  // disabled: rowData.status !== "Pending",
+                  icon: () => <AiFillDelete />,
+                  tooltip: "Delete Order",
+                  onClick: (event, rowData) => {
+                    handleDeleteOrder(rowData);
                   },
-                  showTitle: true,
-                }}
-                actions={[
-                  (rowData) => ({
-                    //disabled: rowData.status !== "Pending",
-                    icon: () => <GrFormView size="33px" />,
-                    tooltip: "View Order",
-                    onClick: (event, rowData) => {
-                      handleViewOrder(rowData);
-                    },
-                  }),
-                ]}
-              />
-            </Box>
-          )}
-
-          {status === "delivery" && (
-            <Box w="100%">
-              <MaterialTable
-                columns={others_columns}
-                data={orders
-                  .filter((r) => r.status === "Delivered")
-                  .map((rec) => {
-                    return { ...rec };
-                  })}
-                title="Delivered Orders"
-                icons={tableIcons}
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: true,
-                  headerStyle: {
-                    backgroundColor: "#9AE6B4",
-                    color: "black",
-                    fontWeight: "bold",
+                }),
+                (rowData) => ({
+                  // disabled: rowData.status !== "Pending",
+                  icon: () => <GrDeliver />,
+                  tooltip: "Deliver Order",
+                  onClick: (event, rowData) => {
+                    handleDeliverOrder(rowData);
                   },
-                  showTitle: true,
-                }}
-                actions={[
-                  (rowData) => ({
-                    //disabled: rowData.status !== "Pending",
-                    icon: () => <GrFormView size="33px" />,
-                    tooltip: "View Order",
-                    onClick: (event, rowData) => {
-                      handleViewOrder(rowData);
-                    },
-                  }),
-                ]}
-              />
-            </Box>
-          )}
+                }),
+              ]}
+            />
+          </Box>
         </Box>
         <Modal onClose={onViewOrderClose} size="6xl" isOpen={isViewOrderOpen}>
           <ModalOverlay />
           <ModalContent>
-            {/* <ModalHeader>Modal Title</ModalHeader> */}
             <ModalCloseButton />
             <ModalBody>
-              {/* <Container maxWidth="container.md" padding={0}> */}
               <Flex
-                h={{ base: "auto", md: "180vh" }}
+                h={{ base: "auto", md: "160vh" }}
                 py={[0, 10, 20]}
                 direction={{ base: "column-reverse", md: "row" }}
               >
                 <Box
                   overflowY={{ base: "scoll", md: "none" }}
-                  //h={{ base: "auto", md: "180vh" }}
+                  h={{ base: "auto", md: "160vh" }}
                 >
-                  {/* <OrderInfoView order={[...singleorder]} /> */}
+                  <OrderInfoView order={[...singleorder]} />
                 </Box>
                 <VStack
                   w={{ base: "auto", md: "60%" }}
@@ -431,10 +352,10 @@ const AdminOrdersHistory = ({ status }) => {
                 >
                   <VStack alignItems="flex-start" spacing={3}>
                     <Heading size="2x1">Your cart</Heading>
-                    {/* <Heading fontFamily="cursive" color="green" size="md">
+                    <Heading fontFamily="cursive" color="green" size="md">
                       order no{" "}
                       {singleorder.length > 0 && singleorder[0].orderno}
-                    </Heading> */}
+                    </Heading>
                   </VStack>
                   <HStack spacing="6" alignItems="center" w="full">
                     <Stack
@@ -443,24 +364,23 @@ const AdminOrdersHistory = ({ status }) => {
                       h={{ base: "130vh", md: "130vh" }}
                       direction="row"
                       justifyContent="space-between"
-                      //alignItems="center"
                       overflowY="scroll"
                     >
-                      {/* <OrderDetails
+                      <OrderDetails
                         orderdetails={orderitems}
                         orderaddon={orderaddon}
-                      /> */}
+                      />
                     </Stack>
                   </HStack>
                 </VStack>
               </Flex>
-              {/* </Container> */}
             </ModalBody>
             <ModalFooter>
               <Button onClick={onViewOrderClose}>Close</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
+
         <Modal
           w="500px"
           h="200px"

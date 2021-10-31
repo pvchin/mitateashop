@@ -2,7 +2,7 @@ const { table } = require("./airtable-orders");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fi, em, od } = event.queryStringParameters;
+  const { id, fi, em, od, st, no } = event.queryStringParameters;
 
   if (id) {
     const order = await table.find(id);
@@ -29,13 +29,24 @@ module.exports = async (event) => {
     return formattedReturn(200, formattedOrder);
   }
 
+  if (no) {
+    const order = await table
+      .select({ view: "sortedview", filterByFormula: `orderno = '${no}'` })
+      .firstPage();
+    const formattedOrder = order.map((rec) => ({
+      id: rec.id,
+      ...rec.fields,
+    }));
+
+    return formattedReturn(200, formattedOrder);
+  }
+
   if (od) {
     const order = await table
       .select({
         view: "sortedview",
         filterByFormula: `AND(email="${em}", orderno="${od}")`,
       })
-      // .select({ view: "sortedview", filterByFormula: `orderno = '${od}'` })
       .firstPage();
     const formattedOrder = order.map((rec) => ({
       id: rec.id,
@@ -52,6 +63,18 @@ module.exports = async (event) => {
       //   filterByFormula: `AND(email="${em}", orderno="${or}")`,
       // })
       .select({ view: "sortedview", filterByFormula: `email = '${em}'` })
+      .firstPage();
+    const formattedOrder = order.map((rec) => ({
+      id: rec.id,
+      ...rec.fields,
+    }));
+
+    return formattedReturn(200, formattedOrder);
+  }
+
+  if (st) {
+    const order = await table
+      .select({ view: "sortedview", filterByFormula: `status = '${st}'` })
       .firstPage();
     const formattedOrder = order.map((rec) => ({
       id: rec.id,

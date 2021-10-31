@@ -8,7 +8,7 @@ import { queryKeys } from "../constants";
 
 async function getUsers(id) {
   //const { data } = await axios.get(`${items_url}`);
-  const { data } = await axios.get(`${users_url}?tk=${id}`);
+  const { data } = await axios.get(`${users_url}?em=${id}`);
   return data;
 }
 

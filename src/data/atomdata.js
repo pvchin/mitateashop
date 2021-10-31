@@ -72,6 +72,9 @@ export const currentorderState = atom({
   default: {
     currentorderid: "",
     currentorderno: "",
+    grossamount: 0,
+    nettamount: 0,
+    deliveryfee: 0,
   },
 });
 

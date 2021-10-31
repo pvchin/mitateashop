@@ -10,6 +10,7 @@ import {
   About,
   Products,
   PrivateRoute,
+  PrivateAdminRoute,
   AuthWrapper,
   UserOrders,
   AdminOrders,
@@ -39,12 +40,7 @@ function App() {
         <Route exact path="/products">
           <Products />
         </Route>
-        <Route exact path="/userorders">
-          <UserOrders />
-        </Route>
-        <Route exact path="/admin">
-          <Admin />
-        </Route>
+
         <Route exact path="/signin">
           <Signin />
         </Route>
@@ -62,6 +58,12 @@ function App() {
         <PrivateRoute exact path="/checkout">
           <Checkout />
         </PrivateRoute>
+        <PrivateRoute exact path="/myorders">
+          <UserOrders />
+        </PrivateRoute>
+        <PrivateAdminRoute exact path="/admin">
+          <Admin />
+        </PrivateAdminRoute>
         <Route exact path="/*">
           <Error />
         </Route>

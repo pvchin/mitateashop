@@ -23,10 +23,12 @@ import {
 import { createLocalStorageStateHook } from "use-local-storage-state";
 
 const OrderDetails = ({ orderdetails, orderaddon }) => {
-  const totalamount = orderdetails.reduce((acc, rec) => {
-    return acc + Math.round((rec.totalprice + Number.EPSILON) * 100) / 100;
-  }, 0);
-  console.log("orderdetails", orderdetails, orderaddon);
+  const totalamount = orderdetails
+    ? orderdetails.reduce((acc, rec) => {
+        return acc + Math.round((rec.totalprice + Number.EPSILON) * 100) / 100;
+      }, 0)
+    : 0;
+
   return (
     <Box w="full">
       <List>
@@ -131,20 +133,24 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
         border="1px"
       />
       <Box>
-        <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(8, 1fr)">
-          <GridItem rowSpan={1} colSpan={6} />
-          <GridItem rowSpan={1} colSpan={1}>
-            <Text fontFamily="cursive" fontSize="15" fontWeight="bold">
-              Total
-            </Text>
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={1}>
-            <Text fontFamily="cursive" fontSize="15">
-              {formatPrice(totalamount)}
-            </Text>
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={1} />
-        </Grid>
+        {totalamount === 0 ? (
+          <Heading size="sm">Your cart is empty!</Heading>
+        ) : (
+          <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(8, 1fr)">
+            <GridItem rowSpan={1} colSpan={6} />
+            <GridItem rowSpan={1} colSpan={1}>
+              <Text fontFamily="cursive" fontSize="15" fontWeight="bold">
+                Total
+              </Text>
+            </GridItem>
+            <GridItem rowSpan={1} colSpan={1}>
+              <Text fontFamily="cursive" fontSize="15">
+                {formatPrice(totalamount)}
+              </Text>
+            </GridItem>
+            <GridItem rowSpan={1} colSpan={1} />
+          </Grid>
+        )}
       </Box>
     </Box>
   );

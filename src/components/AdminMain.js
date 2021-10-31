@@ -47,10 +47,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useOrders } from "../react-query/orders/useOrders";
-import { useSingleOrder } from "../react-query/orders/useSingleOrder";
-import { useOrderItems } from "../react-query/orderitems/useOrderItems";
-import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
+// import { useOrders } from "../react-query/orders/useOrders";
+// import { useSingleOrder } from "../react-query/orders/useSingleOrder";
+// import { useOrderItems } from "../react-query/orderitems/useOrderItems";
+// import { useOrderAddon } from "../react-query/orderaddon/useOrderAddon";
 import { useUpdateOrders } from "../react-query/orders/useUpdateOrders";
 import { useUserContext } from "../context/user_context";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
@@ -159,22 +159,22 @@ const AdminMain = () => {
   const toast = useCustomToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const { orders, setOrderId } = useOrders();
-  const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
-  const { orderitems, setOrderItemId } = useOrderItems();
-  const { orderaddon, setOrderAddonId } = useOrderAddon();
+  // const { orders, setOrderId } = useOrders();
+  // const { singleorder, setSingleOrderId, setSingleOrderNo } = useSingleOrder();
+  // const { orderitems, setOrderItemId } = useOrderItems();
+  // const { orderaddon, setOrderAddonId } = useOrderAddon();
   const [currentorder, setCurrentOrder] = useState({});
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState("confirmorders");
   const updateOrder = useUpdateOrders();
 
   const SwitchCase = () => {
     switch (select) {
       case "confirmorders":
-        return <AdminOrdersHistory status="confirm" />;
+        return <AdminOrdersHistory status="Confirmed" />;
       case "deliveryorders":
-        return <AdminOrdersHistory status="delivery" />;
+        return <AdminOrdersHistory status="Delivered" />;
       case "deletedorders":
-        return <AdminOrdersHistory status="deleted" />;
+        return <AdminOrdersHistory status="Deleted" />;
       case "items":
         return <ItemsTable />;
       case "category":

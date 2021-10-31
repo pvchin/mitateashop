@@ -11,14 +11,14 @@ const Product = ({ image, name, price, id }) => {
     <Wrapper>
       <Container>
         <Box boxSize="330" h="310px" marginBottom={0}>
-          <AspectRatio maxW="330px" ratio={1}>
+          {/* <AspectRatio maxW="330px" ratio={1}> */}
             <Image
               src={`${images_url}${image}`}
               alt={name}
               boxSize="100%"
-              objectFit="cover"
+              objectFit="contain"
             />
-          </AspectRatio>
+          {/* </AspectRatio> */}
           <Link to={`/products/${id}`} className="link">
             <FaSearch />
           </Link>

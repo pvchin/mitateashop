@@ -9,8 +9,12 @@ import {
   Box,
   Button,
   Container,
+  Flex,
+  Heading,
   Image,
   Link,
+  Stack,
+  Text,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
@@ -47,10 +51,18 @@ const Product = ({ id, image, name, price, mprice, lprice, size }) => {
   return (
     <Wrapper>
       <Container>
-        <Box boxSize="300" h="300px">
+        <Box
+          alignItems="center"
+          rounded="20px"
+          overflow="hidden"
+          bg="white"
+          lineHeight="0"
+          boxShadow="base"
+          _hover={{ boxShadow: "dark-lg" }}
+        >
           {/* <AspectRatio maxW="280px" ratio={1}> */}
-          <AspectRatio w="300px" h="300px" ratio={1}>
-            <Wrap w="300px" h="300px" px="1rem" spacing={4} justify="center">
+          {/* <AspectRatio maxW="500px" ratio={1}> */}
+          {/* <Wrap w="300px" h="300px" px="1rem" spacing={4} justify="center">
               <WrapItem
                 w="280px"
                 h="280px"
@@ -60,24 +72,27 @@ const Product = ({ id, image, name, price, mprice, lprice, size }) => {
                 bg="white"
                 lineHeight="0"
                 _hover={{ boxShadow: "dark-lg" }}
-              >
-                <Image
-                  src={`${images_url}${image}`}
-                  fallbackSrc="https://via.placeholder.com/150"
-                  alt={name}
-                  width="100%"
-                  display="block"
-                  fit="cover"
-                />
-              </WrapItem>
-            </Wrap>
-          </AspectRatio>
+              > */}
+          
+          <Image
+            src={`${images_url}${image}`}
+            fallbackSrc="https://via.placeholder.com/150"
+            alt={name}
+            boxSize="200px"
+            objectFit="fill"
+          />
+          
+          {/* </WrapItem>
+            </Wrap> */}
+          {/* </AspectRatio> */}
         </Box>
+        <Box mt={2}>
         <footer>
-          <h5>{name}</h5>
-          <p>{formatPrice(price)}</p>
+          <Heading size="sm">{name}</Heading>
+          <Text  fontSize="22" fontWeight="bold">{formatPrice(price)}</Text>
         </footer>
-        <Box align="center" mt={1}>
+        </Box>
+        <Box align="center" mt={2}>
           <Button
             leftIcon={<GiShoppingCart />}
             colorScheme="teal"

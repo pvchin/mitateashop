@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Heading, Text } from "@chakra-ui/react";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
@@ -24,11 +25,11 @@ const Filters = () => {
     clearFilters,
     //all_products,
   } = useFilterContext();
-  const { items: all_products } = useItems();
+  const { items: all_products, setFilter } = useItems();
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
-  
+
   return (
     <Wrapper>
       <div className="content">
@@ -57,7 +58,8 @@ const Filters = () => {
                     type="button"
                     name="category"
                     className={`${
-                      category === c.toLowerCase() ? "active" : null
+                      //category === c.toLowerCase() ? "active" : null
+                      category === c ? "active" : null
                     }`}
                   >
                     {c}

@@ -110,15 +110,14 @@ const tableIcons = {
 };
 
 const DeliveryPeriodTable = () => {
-    const { deliveryperiod } = useDeliveryPeriod();
-    const addDeliveryPeriod = useAddDeliveryPeriod()
-    const updateDeliveryPeriod = useUpdateDeliveryPeriod()
-    const deleteDeliveryPeriod = useDeleteDeliveryPeriod()
-
+  const { deliveryperiod } = useDeliveryPeriod();
+  const addDeliveryPeriod = useAddDeliveryPeriod();
+  const updateDeliveryPeriod = useUpdateDeliveryPeriod();
+  const deleteDeliveryPeriod = useDeleteDeliveryPeriod();
 
   const update_DeliveryPeriod = (data) => {
     const { id, rec_id, ...fields } = data;
-    updateDeliveryPeriod({ id,  ...fields });
+    updateDeliveryPeriod({ id, ...fields });
   };
 
   const add_DeliveryPeriod = (data) => {
@@ -133,7 +132,7 @@ const DeliveryPeriodTable = () => {
 
   return (
     <VStack>
-      <Box w="600px">
+      <Box w="600px" overflow="scroll">
         <MaterialTable
           columns={columns}
           data={deliveryperiod}
@@ -165,6 +164,7 @@ const DeliveryPeriodTable = () => {
           options={{
             pageSize: 5,
             filtering: true,
+            paging: false,
             headerStyle: {
               backgroundColor: "#9AE6B4",
               color: "black",

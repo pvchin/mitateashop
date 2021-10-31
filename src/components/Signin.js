@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 import {
   Box,
   Button,
@@ -60,22 +61,23 @@ const Signin = () => {
         } = userCredential;
         CreateUser(uid, email);
         updateAuthUser({ token: uid, email: email });
-        setLocalUser({ token: uid, email: email });
-        history.push("/user");
+        setLocalUser({ token: uid, email: email, role: 0 });
+        setUserId(email);
         toast({
           title: "Sign Up successfully!",
           status: "success",
         });
+        history.push("/user");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("error code", errorCode, errorMessage);
+        //console.log("error code", errorCode, errorMessage);
         var errmsg = "";
         if (errorCode === "auth/email-already-in-use") {
           errmsg = "Email already existed!";
         } else {
-          errmsg = "";
+          errmsg = errorCode;
         }
         toast({
           title: "SignUp Error! " + errmsg,
@@ -86,7 +88,7 @@ const Signin = () => {
 
   async function handleLogin(e) {
     e.preventDefault();
-    console.log("login", email, password);
+    //console.log("login", email, password);
 
     await signInWithEmailAndPassword(firebase_auth, email, password)
       .then((userCredential) => {
@@ -95,21 +97,25 @@ const Signin = () => {
           user: { uid },
         } = userCredential;
         GetUser(uid, email);
-        setLocalUser([{ email: email, token: uid }]);
-        setLocalUser([{ email: email, token: uid }]);
-        history.push("/user");
+        setLocalUser({ email: email, token: uid });
+
         toast({
           title: "Sign In successfully!",
           status: "success",
         });
+
+        history.push("/");
+        window.location.reload();
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("error", error.code, errorMessage);
+        console.log("error", error.code, error.Message);
         var errmsg = "";
         if (errorCode === "auth/user-not-found") {
           errmsg = "Email not found!";
+        } else {
+          errmsg = errorCode;
         }
         toast({
           title: "SignIn Error! " + errmsg,
@@ -120,7 +126,7 @@ const Signin = () => {
 
   const CreateUser = (uid, email) => {
     console.log("create", uid, email);
-    addUser({ email: email, token: uid });
+    addUser({ email: email, token: uid, role: 0 });
   };
 
   const GetUser = (uid, email) => {

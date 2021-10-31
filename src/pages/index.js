@@ -6,6 +6,7 @@ import Cart from "./CartPage";
 import Error from "./ErrorPage";
 import Checkout from "./CheckoutPage";
 import PrivateRoute from "./PrivateRoute";
+import PrivateAdminRoute from "./PrivateAdminRoute";
 import AuthWrapper from "./AuthWrapper";
 import UserOrders from "./UserOrdersPage"
 import AdminOrders from "./AdminOrdersPage";
@@ -21,6 +22,7 @@ export {
   Error,
   Checkout,
   PrivateRoute,
+  PrivateAdminRoute,
   AuthWrapper,
   UserOrders,
   AdminOrders,

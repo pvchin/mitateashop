@@ -85,8 +85,8 @@ const columns = [
   },
   {
     title: "Delivery Fee",
-      field: "deliveryfee",
-    type: "currency"
+    field: "deliveryfee",
+    type: "currency",
   },
 ];
 
@@ -137,7 +137,7 @@ const AreasTable = () => {
 
   return (
     <VStack>
-      <Box w="600px" align="center">
+      <Box w="600px" align="center" overfloe="scroll">
         <MaterialTable
           columns={columns}
           data={areas}
@@ -169,10 +169,14 @@ const AreasTable = () => {
           options={{
             pageSize: 5,
             filtering: true,
+            paging: false,
             headerStyle: {
               backgroundColor: "#9AE6B4",
               color: "black",
             },
+            // rowStyle: {
+            //   fontSize: 18,
+            // },
             showTitle: true,
           }}
         />

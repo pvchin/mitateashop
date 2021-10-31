@@ -34,7 +34,7 @@ const FilterContext = React.createContext();
 
 export const FilterProvider = ({ children }) => {
   //const { products } = useProductsContext();
-  const { items: products } = useItems();
+  const { items: products, setFilter } = useItems();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -62,6 +62,7 @@ export const FilterProvider = ({ children }) => {
   };
 
   const updateFilters = (e) => {
+    console.log("filter context", e.target)
     let name = e.target.name;
     let value = e.target.value;
     if (name === "category") {

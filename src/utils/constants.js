@@ -33,16 +33,16 @@ export const links = [
     text: "products",
     url: "/products",
   },
-  {
-    id: 4,
-    text: "orders",
-    url: "/userorders",
-  },
-  {
-    id: 5,
-    text: "admin",
-    url: "/admin",
-  },
+  // {
+  //   id: 4,
+  //   text: "my orders",
+  //   url: "/userorders",
+  // },
+  // {
+  //   id: 5,
+  //   text: "admin",
+  //   url: "/admin",
+  // },
 ];
 
 export const services = [

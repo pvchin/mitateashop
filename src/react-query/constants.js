@@ -5,6 +5,7 @@ export const queryKeys = {
     orderitems: "orderitems",
     orderaddon: "orderaddon",
     singleorder: "singleorder",
+    batchorders: "batchorders",
     users: "users",
     carts: "carts",
     document: "document",

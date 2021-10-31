@@ -14,7 +14,7 @@ const AdminOrderPage = () => {
   
   return (
     <main>
-      <PageHero title="cart" />
+      <PageHero title="admin" />
       <Wrapper className="page">
         <AdminOrdersHistory />
       </Wrapper>
