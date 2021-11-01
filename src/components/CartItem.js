@@ -7,6 +7,7 @@ import {
   Button,
   Heading,
   HStack,
+  VStack,
   Input,
   NumberInput,
   NumberInputField,
@@ -84,7 +85,6 @@ const CartItem = ({
   };
 
   const handleOnDeleteConfirm = () => {
-    console.log("ondelee", id);
     Delete_Item(id);
   };
   return (
@@ -133,6 +133,14 @@ const CartItem = ({
             Ice: {icelevel}% Sugar: {sugarlevel}%
           </Text>
           <h5 className="price-small">{formatPrice(nettprice)}</h5>
+          <VStack align="left" py={0}>
+            <Heading as="h5" display={{ base: "inline", md: "none" }}>
+              Qty: {orderqty}
+            </Heading>
+            <Heading as="h5" display={{ base: "inline", md: "none" }}>
+              Subtotal: {formatPrice(totalprice)}
+            </Heading>
+          </VStack>
         </div>
       </div>
       <h5 className="price">{formatPrice(nettprice)}</h5>
@@ -151,7 +159,10 @@ const CartItem = ({
             min={1}
             max={100}
           >
-            <NumberInputField fontSize={{base: "auto", md: "3xl"}} name="itemqty" />
+            <NumberInputField
+              fontSize={{ base: "auto", md: "3xl" }}
+              name="itemqty"
+            />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
