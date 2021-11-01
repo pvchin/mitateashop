@@ -137,7 +137,7 @@ const CartItem = ({
             <Heading as="h5" display={{ base: "inline", md: "none" }}>
               Qty: {orderqty}
             </Heading>
-            <Heading as="h5" display={{ base: "inline", md: "none" }}>
+            <Heading  as="h5" display={{ base: "inline", md: "none" }}>
               Subtotal: {formatPrice(totalprice)}
             </Heading>
           </VStack>
@@ -202,7 +202,7 @@ const Wrapper = styled.article`
   grid-template-rows: 75px;
   gap: 3rem 1rem;
   justify-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
   align-items: center;
   .title {
     height: 100%;
