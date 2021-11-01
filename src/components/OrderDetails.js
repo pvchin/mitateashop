@@ -56,8 +56,8 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
                         w="100"
                         p={1}
                         display={{
-                          base: "none",
-                          md: "block"
+                          base: "block",
+                          md: "block",
                         }}
                       >
                         <AspectRatio maxW="100px" ratio={1}>

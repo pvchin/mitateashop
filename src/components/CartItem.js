@@ -84,7 +84,7 @@ const CartItem = ({
   };
 
   const handleOnDeleteConfirm = () => {
-    console.log("ondelee", id)
+    console.log("ondelee", id);
     Delete_Item(id);
   };
   return (
@@ -144,14 +144,14 @@ const CartItem = ({
           <Input {...input} fontSize="1.3rem" textColor="red" />
           <Button {...dec}>-</Button> */}
           <NumberInput
-            size="3xl"
+            size={{ base: "sm", md: "3xl" }}
             name="itemqty"
             value={orderqty}
             onChange={(e) => handleQtyChange(e)}
             min={1}
             max={100}
           >
-            <NumberInputField fontSize="3xl" name="itemqty" />
+            <NumberInputField fontSize={{base: "auto", md: "3xl"}} name="itemqty" />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
