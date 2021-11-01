@@ -133,7 +133,7 @@ const CartItem = ({
             Ice: {icelevel}% Sugar: {sugarlevel}%
           </Text>
           <h5 className="price-small">{formatPrice(nettprice)}</h5>
-          <VStack align="left" py={0}>
+          <VStack align="left">
             <Heading as="h5" display={{ base: "inline", md: "none" }}>
               Qty: {orderqty}
             </Heading>

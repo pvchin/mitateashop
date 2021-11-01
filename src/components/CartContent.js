@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Divider } from "@chakra-ui/react";
 import { createLocalStorageStateHook } from "use-local-storage-state";
 import { useCartContext } from "../context/cart_context";
 import { useHistory } from "react-router-dom";
@@ -94,7 +94,8 @@ const CartContent = () => {
               />
             );
           })}
-      <hr />
+      {/* <hr /> */}
+      <Divider pt={1}  borderColor="blue.200"/>
       <div className="link-container">
         <button type="button" className="link-btn" onClick={handleSaveItem}>
           save and continue shopping
