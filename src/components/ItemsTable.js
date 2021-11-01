@@ -274,6 +274,7 @@ const ItemsTable = () => {
               add_Item={add_Item}
               update_Item={update_Item}
               statustype={statustype}
+              onProductClose={onProductClose}
             />
           </ModalBody>
 

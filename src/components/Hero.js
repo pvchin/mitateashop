@@ -22,16 +22,24 @@ const Hero = () => {
         <Image
           src={heroBcg}
           alt="place"
-          className="main-img"
+          w="100%"
+          h="550px"
           objectFit="cover"
-          borderRadius="30"
+          borderRadius="md"
+          //className="main-img"
         />
         <Image
           src={heroBcg2}
           alt="slogan"
-          className="accent-img"
+          position="absolute"
+          bottom={0}
+          left={0}
+          width="250px"
+          transform="translateX(-50%)"
+          //transform="rotate(25deg)"
           objectFit="cover"
-          borderRadius="50"
+          borderRadius="md"
+          //className="accent-img"
         />
       </article>
     </Wrapper>

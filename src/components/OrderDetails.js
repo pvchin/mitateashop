@@ -52,7 +52,14 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
                 <Box>
                   <Grid templateColumns="repeat(8, 1fr)">
                     <GridItem colSpan="1">
-                      <Box w="100" p={1}>
+                      <Box
+                        w="100"
+                        p={1}
+                        display={{
+                          base: "none",
+                          md: "block"
+                        }}
+                      >
                         <AspectRatio maxW="100px" ratio={1}>
                           <img src={`${images_url}${image}`} alt={name} />
                         </AspectRatio>

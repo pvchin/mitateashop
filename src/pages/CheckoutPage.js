@@ -165,7 +165,7 @@ const CheckoutPage = () => {
         >
           <Box
             overflowY={{ base: "scoll", md: "none" }}
-            //h={{ base: "auto", md: "180vh" }}
+            h={{ base: "auto", md: "160vh" }}
           >
             <OrderInfo
               order={order}
@@ -193,7 +193,7 @@ const CheckoutPage = () => {
               <Stack
                 spacing="0"
                 w="full"
-                h={{ base: "130vh", md: "130vh" }}
+                h={{ base: "auto", md: "130vh" }}
                 direction="row"
                 justifyContent="space-between"
                 //alignItems="center"

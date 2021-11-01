@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { formatPrice } from "../utils/helpers";
 import { GiShoppingCart } from "react-icons/gi";
 import { useHistory } from "react-router-dom";
+import NewLogo from "../assets/new.png";
 import {
   AspectRatio,
   Box,
@@ -25,7 +26,16 @@ import { useOrderItems } from "../react-query/orderitems/useOrderItems";
 import { useAddOrderItems } from "../react-query/orderitems/useCreateOrderItems";
 import { useUpdateOrderItems } from "../react-query/orderitems/useUpdateOrderItems";
 
-const Product = ({ id, image, name, price, mprice, lprice, size }) => {
+const Product = ({
+  id,
+  image,
+  name,
+  price,
+  mprice,
+  lprice,
+  size,
+  newarrival,
+}) => {
   const history = useHistory();
   const [orderitem, setOrderItem] = useRecoilState(orderItemState);
   const AddToCart = (e) => {
@@ -60,20 +70,6 @@ const Product = ({ id, image, name, price, mprice, lprice, size }) => {
           boxShadow="base"
           _hover={{ boxShadow: "dark-lg" }}
         >
-          {/* <AspectRatio maxW="280px" ratio={1}> */}
-          {/* <AspectRatio maxW="500px" ratio={1}> */}
-          {/* <Wrap w="300px" h="300px" px="1rem" spacing={4} justify="center">
-              <WrapItem
-                w="280px"
-                h="280px"
-                boxShadow="base"
-                rounded="20px"
-                overflow="hidden"
-                bg="white"
-                lineHeight="0"
-                _hover={{ boxShadow: "dark-lg" }}
-              > */}
-          
           <Image
             src={`${images_url}${image}`}
             fallbackSrc="https://via.placeholder.com/150"
@@ -81,16 +77,38 @@ const Product = ({ id, image, name, price, mprice, lprice, size }) => {
             boxSize="200px"
             objectFit="fill"
           />
-          
-          {/* </WrapItem>
-            </Wrap> */}
-          {/* </AspectRatio> */}
         </Box>
+        {newarrival && (
+          <Heading
+            bgColor="whiteAlpha"
+            borderRadius="md"
+            border="1px solid red"
+            color="red"
+            size="xl"
+            //fontFamily="monospace"
+            position="absolute"
+            transform="translateY(-600%) translateX(+5%) rotate(-45deg)"
+          >
+            New!
+          </Heading>
+        )}
+        {/* <Heading
+          bgColor="gray.300"
+          borderRadius="lg"
+          border="1px solid red"
+          color="red"
+          position="absolute"
+          transform="translateY(-380%) translateX(+20%) rotate(-45deg)"
+        >
+          Sold Out!
+        </Heading> */}
         <Box mt={2}>
-        <footer>
-          <Heading size="sm">{name}</Heading>
-          <Text  fontSize="22" fontWeight="bold">{formatPrice(price)}</Text>
-        </footer>
+          <footer>
+            <Heading size="sm">{name}</Heading>
+            <Text fontSize="22" fontWeight="bold">
+              {formatPrice(price)}
+            </Text>
+          </footer>
         </Box>
         <Box align="center" mt={2}>
           <Button

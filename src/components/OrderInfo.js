@@ -387,7 +387,16 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                       onSubmit(values, "Confirmed")
                     )}
                   >
-                    Confirm Order
+                    <Text
+                      fontWeight="bold"
+                      fontSize={{
+                        base: "12px", // 0-48em
+                        md: "14px", // 48em-80em,
+                        xl: "18px", // 80em+
+                      }}
+                    >
+                      Confirm Order
+                    </Text>
                   </Button>
                   <Button
                     size="lg"
@@ -398,7 +407,16 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                       onSubmit(values, "Pending")
                     )}
                   >
+                    <Text
+                      fontWeight="bold"
+                      fontSize={{
+                        base: "12px", // 0-48em
+                        md: "14px", // 48em-80em,
+                        xl: "18px", // 80em+
+                      }}
+                    >
                     Continue Shopping
+                    </Text>
                   </Button>
                   {/* <Button
                     size="lg"

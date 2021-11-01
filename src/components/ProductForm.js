@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { Controller, useForm } from "react-hook-form";
@@ -90,9 +90,13 @@ export default function ProductForm({
   add_Item,
   update_Item,
   statustype,
+  onProductClose,
 }) {
+  const history = useHistory();
   const field_width = "120";
   const { items } = useItems();
+  const [features, setFeatures] = useState(false);
+  const [newitem, setNewItem] = useState(false);
 
   const {
     handleSubmit,
@@ -115,6 +119,10 @@ export default function ProductForm({
     }
   };
 
+  const handleClose = () => {
+    onProductClose();
+  };
+
   const handleGetNewItemNo = () => {
     const array = items.sort((a, b) => (a.itemno > b.itemno ? 1 : -1));
     const lastno = 10000 + parseInt(array.at(-1).itemno.substring(1)) + 1;
@@ -122,6 +130,11 @@ export default function ProductForm({
     const data = { ...state, itemno: newno };
     setState((prev) => (prev = { ...data }));
   };
+
+  useEffect(() => {
+    setFeatures(state.featured);
+    setNewItem(state.newarrival);
+  }, []);
 
   return (
     <Container maxWidth="container.xl" padding={0}>
@@ -146,14 +159,14 @@ export default function ProductForm({
               templateColumns="12"
               templateRows="7"
               columnGap={3}
-              rowGap={6}
+              rowGap={3}
               px={5}
               w={{ base: "auto", md: "full", lg: "full" }}
               border="1px solid black"
               borderRadius="20"
               backgroundColor="blue.50"
             >
-              <GridItem colSpan={4} mt={5}>
+              <GridItem colSpan={3} mt={5}>
                 <HStack>
                   <FormControl>
                     <Controller
@@ -191,7 +204,7 @@ export default function ProductForm({
                   />
                 </HStack>
               </GridItem>
-              <GridItem colSpan={5} mt={5}>
+              <GridItem colSpan={6} mt={5}>
                 <FormControl>
                   <Controller
                     control={control}
@@ -220,7 +233,7 @@ export default function ProductForm({
                   />
                 </FormControl>
               </GridItem>
-              <GridItem colSpan={3} rowSpan={3} mt={5}>
+              <GridItem colSpan={3} rowSpan={5} mt={5}>
                 {/* <Box
                   p={1}
                   position="relative"
@@ -229,14 +242,14 @@ export default function ProductForm({
                   align="center"
                 > */}
                 {/* <AspectRatio maxW={500} ratio={1} align="center"> */}
-                  {/* <Wrap
+                {/* <Wrap
                       w={300}
                       h={300}
                       px="1rem"
                       spacing={4}
                       justify="center"
                     > */}
-                  {/* <WrapItem
+                {/* <WrapItem
                         w="280px"
                         h="330px"
                         boxShadow="base"
@@ -246,16 +259,16 @@ export default function ProductForm({
                         lineHeight="0"
                         //_hover={{ boxShadow: "dark-lg" }}
                       > */}
-                  <Image
-                    boxSize="300px"
-                    src={`${images_url}${state.image}`}
-                    fallbackSrc="https://via.placeholder.com/250"
-                    alt="blank"
-                    //display="block"
-                    objectFit="cover"
-                  />
-                  {/* </WrapItem> */}
-                  {/* </Wrap> */}
+                <Image
+                  boxSize="300px"
+                  src={`${images_url}${state.image}`}
+                  fallbackSrc="https://via.placeholder.com/250"
+                  alt="blank"
+                  //display="block"
+                  objectFit="cover"
+                />
+                {/* </WrapItem> */}
+                {/* </Wrap> */}
                 {/* </AspectRatio> */}
                 {/* </Box> */}
               </GridItem>
@@ -317,7 +330,7 @@ export default function ProductForm({
                   />
                 </FormControl>
               </GridItem>
-              <GridItem colSpan={6}>
+              <GridItem colSpan={9}>
                 <FormControl>
                   <Controller
                     control={control}
@@ -346,7 +359,7 @@ export default function ProductForm({
                   />
                 </FormControl>
               </GridItem>
-              <GridItem colSpan={4}>
+              <GridItem colSpan={9}>
                 <FormControl>
                   <Controller
                     control={control}
@@ -375,37 +388,8 @@ export default function ProductForm({
                   />
                 </FormControl>
               </GridItem>
-              <GridItem colSpan={2}>
-                <FormControl>
-                  <Controller
-                    control={control}
-                    name="featured"
-                    defaultValue={state.featured}
-                    render={({ field: { onChange, value, ref } }) => (
-                      <InputGroup>
-                        <HStack w="100%" py={1}>
-                          {/* <InputLeftAddon
-                            children="Featured"
-                            minWidth={field_width}
-                          /> */}
-                          <Checkbox
-                            name="featured"
-                            value={value}
-                            width="full"
-                            onChange={onChange}
-                            borderColor="gray.400"
-                            //textTransform="capitalize"
-                            ref={ref}
-                          >
-                            Featured
-                          </Checkbox>
-                        </HStack>
-                      </InputGroup>
-                    )}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem colSpan={5}>
+
+              <GridItem colSpan={6}>
                 <FormControl>
                   <Controller
                     control={control}
@@ -435,36 +419,7 @@ export default function ProductForm({
                   />
                 </FormControl>
               </GridItem>
-              <GridItem colSpan={1}>
-                <FormControl>
-                  <Controller
-                    control={control}
-                    name="issize"
-                    defaultValue={state.issize}
-                    render={({ field: { onChange, value, ref } }) => (
-                      <InputGroup>
-                        <HStack w="100%" py={1}>
-                          {/* <InputLeftAddon
-                            children="Size"
-                            minWidth={field_width}
-                          /> */}
-                          <Checkbox
-                            name="issize"
-                            value={value}
-                            width="full"
-                            onChange={onChange}
-                            borderColor="gray.400"
-                            //textTransform="capitalize"
-                            ref={ref}
-                          >
-                            Size
-                          </Checkbox>
-                        </HStack>
-                      </InputGroup>
-                    )}
-                  />
-                </FormControl>
-              </GridItem>
+
               <GridItem colSpan={3}>
                 <FormControl>
                   <Controller
@@ -526,6 +481,192 @@ export default function ProductForm({
                 </FormControl>
               </GridItem>
               <GridItem colSpan={12}>
+                <Divider borderWidth={1} borderColor="teal" />
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <Controller
+                    control={control}
+                    name="issize"
+                    defaultValue={state.issize}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <InputGroup>
+                        <HStack w="100%" py={1}>
+                          {/* <InputLeftAddon
+                            children="Size"
+                            minWidth={field_width}
+                          /> */}
+                          <Checkbox
+                            name="issize"
+                            value={value}
+                            width="full"
+                            onChange={onChange}
+                            borderColor="gray.400"
+                            //textTransform="capitalize"
+                            ref={ref}
+                          >
+                            Bess Seller
+                          </Checkbox>
+                        </HStack>
+                      </InputGroup>
+                    )}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <Controller
+                    control={control}
+                    name="issize"
+                    defaultValue={state.issize}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <InputGroup>
+                        <HStack w="100%" py={1}>
+                          {/* <InputLeftAddon
+                            children="Size"
+                            minWidth={field_width}
+                          /> */}
+                          <Checkbox
+                            name="issize"
+                            value={value}
+                            width="full"
+                            onChange={onChange}
+                            borderColor="gray.400"
+                            //textTransform="capitalize"
+                            ref={ref}
+                          >
+                            Size
+                          </Checkbox>
+                        </HStack>
+                      </InputGroup>
+                    )}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <Controller
+                    control={control}
+                    name="issize"
+                    defaultValue={state.issize}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <InputGroup>
+                        <HStack w="100%" py={1}>
+                          {/* <InputLeftAddon
+                            children="Size"
+                            minWidth={field_width}
+                          /> */}
+                          <Checkbox
+                            name="issize"
+                            value={value}
+                            width="full"
+                            onChange={onChange}
+                            borderColor="gray.400"
+                            //textTransform="capitalize"
+                            ref={ref}
+                          >
+                            New Item 
+                          </Checkbox>
+                        </HStack>
+                      </InputGroup>
+                    )}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <Controller
+                    control={control}
+                    name="issize"
+                    defaultValue={state.issize}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <InputGroup>
+                        <HStack w="100%" py={1}>
+                          {/* <InputLeftAddon
+                            children="Size"
+                            minWidth={field_width}
+                          /> */}
+                          <Checkbox
+                            name="issize"
+                            value={value}
+                            width="full"
+                            onChange={onChange}
+                            borderColor="gray.400"
+                            //textTransform="capitalize"
+                            ref={ref}
+                          >
+                            Drink Item
+                          </Checkbox>
+                        </HStack>
+                      </InputGroup>
+                    )}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <Controller
+                    control={control}
+                    name="issize"
+                    defaultValue={state.issize}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <InputGroup>
+                        <HStack w="100%" py={1}>
+                          {/* <InputLeftAddon
+                            children="Size"
+                            minWidth={field_width}
+                          /> */}
+                          <Checkbox
+                            name="issize"
+                            value={value}
+                            width="full"
+                            onChange={onChange}
+                            borderColor="gray.400"
+                            //textTransform="capitalize"
+                            ref={ref}
+                          >
+                            Penefits
+                          </Checkbox>
+                        </HStack>
+                      </InputGroup>
+                    )}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={2}>
+                <FormControl>
+                  <Controller
+                    control={control}
+                    name="issize"
+                    defaultValue={state.issize}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <InputGroup>
+                        <HStack w="100%" py={1}>
+                          {/* <InputLeftAddon
+                            children="Size"
+                            minWidth={field_width}
+                          /> */}
+                          <Checkbox
+                            name="issize"
+                            value={value}
+                            width="full"
+                            onChange={onChange}
+                            borderColor="gray.400"
+                            //textTransform="capitalize"
+                            ref={ref}
+                          >
+                            Free Delivery
+                          </Checkbox>
+                        </HStack>
+                      </InputGroup>
+                    )}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={12}>
+                <Divider borderWidth={1} borderColor="teal" />
+              </GridItem>
+              <GridItem colSpan={12}>
                 <ButtonGroup py={5}>
                   <Button
                     leftIcon={<FiSave />}
@@ -541,6 +682,7 @@ export default function ProductForm({
                     variant="solid"
                     bg="blue.200"
                     isFullWidth
+                    onClick={handleClose}
                   >
                     Close
                   </Button>
