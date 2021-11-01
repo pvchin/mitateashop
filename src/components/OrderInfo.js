@@ -854,7 +854,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                           borderRadius="25"
                           backgroundColor="gray.100"
                         >
-                          <Text fontSize="15">Please call upon arrival</Text>
+                          <Text fontSize="16">Please call upon arrival</Text>
                           <Text
                             fontSize="25"
                             fontWeight="extrabold"
@@ -863,10 +863,10 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                           >
                             7112268
                           </Text>
-                          <Text fontSize="18">
+                          <Text fontSize="16">
                             and we will bring over to your car!
                           </Text>
-                          <Text fontSize="18">
+                          <Text fontSize="16">
                             If you require any money changes, please let us know
                             in advance.
                           </Text>
