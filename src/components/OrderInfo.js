@@ -415,7 +415,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                         xl: "18px", // 80em+
                       }}
                     >
-                    Continue Shopping
+                      Continue Shopping
                     </Text>
                   </Button>
                   {/* <Button
@@ -854,9 +854,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                           borderRadius="25"
                           backgroundColor="gray.100"
                         >
-                          <Text fontFamily="cursive" fontSize="15">
-                            Please call upon arrival
-                          </Text>
+                          <Text fontSize="15">Please call upon arrival</Text>
                           <Text
                             fontSize="25"
                             fontWeight="extrabold"
@@ -865,10 +863,10 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                           >
                             7112268
                           </Text>
-                          <Text fontFamily="cursive" fontSize="18">
+                          <Text fontSize="18">
                             and we will bring over to your car!
                           </Text>
-                          <Text fontFamily="cursive" fontSize="18">
+                          <Text fontSize="18">
                             If you require any money changes, please let us know
                             in advance.
                           </Text>
@@ -923,7 +921,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                                   </GridItem>
                                   <GridItem colSpan={4}>
                                     <Text
-                                      fontFamily="cursive"
+                                      //fontFamily="cursive"
                                       fontSize="16"
                                       color="blue.500"
                                     >
@@ -941,7 +939,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                                   </GridItem>
                                   <GridItem colSpan={4}>
                                     <Text
-                                      fontFamily="cursive"
+                                      //fontFamily="cursive"
                                       fontSize="16"
                                       color="blue.500"
                                     >
@@ -959,7 +957,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                                   </GridItem>
                                   <GridItem colSpan={4}>
                                     <Text
-                                      fontFamily="cursive"
+                                      //fontFamily="cursive"
                                       fontSize="16"
                                       color="blue.500"
                                     >
@@ -977,7 +975,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                             >
                               <Box>
                                 <Container>
-                                  <Text fontFamily="cursive" fontSize="16">
+                                  <Text fontSize="16">
                                     Pls whatsapp your bank receipt to:
                                   </Text>
                                   <Text
@@ -989,7 +987,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                                     7112268
                                   </Text>
 
-                                  <Text fontFamily="cursive" fontSize="16">
+                                  <Text fontSize="16">
                                     Pls state your order # on your whatsapp
                                   </Text>
                                   <Text

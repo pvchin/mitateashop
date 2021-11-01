@@ -136,7 +136,7 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
         mt={2}
         mb={2}
         colorScheme="red"
-        borderColor="blue.300"
+        borderColor="green.300"
         border="1px"
       />
       <Box>
@@ -146,14 +146,12 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
           <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(8, 1fr)">
             <GridItem rowSpan={1} colSpan={6} />
             <GridItem rowSpan={1} colSpan={1}>
-              <Text fontFamily="cursive" fontSize="15" fontWeight="bold">
+              <Text fontSize="15" fontWeight="bold">
                 Total
               </Text>
             </GridItem>
             <GridItem rowSpan={1} colSpan={1}>
-              <Text fontFamily="cursive" fontSize="15">
-                {formatPrice(totalamount)}
-              </Text>
+              <Text fontSize="15">{formatPrice(totalamount)}</Text>
             </GridItem>
             <GridItem rowSpan={1} colSpan={1} />
           </Grid>

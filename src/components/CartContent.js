@@ -95,7 +95,7 @@ const CartContent = () => {
             );
           })}
       {/* <hr /> */}
-      <Divider pt={1}  borderColor="blue.200"/>
+      <Divider pt={1}  borderColor="green.200"/>
       <div className="link-container">
         <button type="button" className="link-btn" onClick={handleSaveItem}>
           save and continue shopping
