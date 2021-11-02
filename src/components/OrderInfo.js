@@ -849,7 +849,8 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                     <TabPanels>
                       <TabPanel>
                         <Box
-                          p={5}
+                          py={2}
+                          px={3}
                           h="200"
                           borderRadius="25"
                           backgroundColor="gray.100"

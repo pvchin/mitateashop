@@ -205,7 +205,7 @@ const CartTotals = ({ items }) => {
                 </Heading>
               </GridItem>
             </Grid>
-            <Grid templateColumns="repeat(2,1fr)">
+            {/* <Grid templateColumns="repeat(2,1fr)">
               <GridItem>
                 <Text as="h5" size="sm" mt={2} ml={10}>
                   shipping fee :
@@ -216,7 +216,7 @@ const CartTotals = ({ items }) => {
                   {formatPrice(shippingfee)}
                 </Text>
               </GridItem>
-            </Grid>
+            </Grid> */}
             <Divider borderColor="blue.200" border="2px" my={8} />
             <Heading as="h4" size="md" mt={10} align="center">
               order total :{" "}

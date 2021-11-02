@@ -65,14 +65,17 @@ const SingleProduct = () => {
   const [orderitem, setOrderItem] = useRecoilState(orderItemState);
   const [orderprice, setOrderPrice] = useState(0);
   const [sugarlevel, setSugarLevel] = React.useState("50");
-
   const [icelevel, setIceLevel] = React.useState("50");
   const [isCalc, setIsCalc] = React.useState(true);
   const [isSizePrice, setIsSizePrice] = React.useState(0);
   const [sizeType, setSizeType] = React.useState("");
   const [isLoad, setIsLoad] = React.useState(true);
+  console.log("sizetype", sizeType)
+
   const { name, price, mprice, lprice, description, image, size, id } =
     orderitem;
+
+
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -113,14 +116,16 @@ const SingleProduct = () => {
       addon: checkedItems,
     }));
 
-    //console.log("orderitem", orderitem);
+    console.log("orderitem", orderitem);
   };
 
   const Update_OrderItem = () => {
-    const newdata = [...carts, orderitem];
+    const newrec = { ...orderitem, size: sizeType, sugarlevel: sugarlevel, icelevel: icelevel }
+    const newdata = [...carts, newrec];
     //addCart(orderitem);
     //setMCarts(newdata);
     //queryClient.invalidateQueries("carts");
+    console.log("update orderitems", newdata)
     updateCarts(newdata)
     setTotalItems((prev) => (prev = newdata.length));
   };

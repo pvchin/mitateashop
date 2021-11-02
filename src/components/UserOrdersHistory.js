@@ -73,6 +73,7 @@ import { useAuthUser } from "../react-query/auth/useAuthUser";
 import OrderDetails from "../components/OrderDetails";
 import OrderInfoView from "../components/OrderInfoView";
 import OrderEdit from "./OrderEdit";
+import UserProfile from "./UserProfile";
 
 const confirm_columns = [
   {
@@ -194,6 +195,34 @@ const others_columns = [
   {
     title: "Comment",
     field: "comments",
+    editable: "never",
+  },
+];
+
+const mini_columns = [
+  {
+    title: "Order No",
+    field: "orderno",
+  },
+
+  {
+    title: "Request Date",
+    field: "requestdate",
+    type: "date",
+    dateSetting: { locale: "en-GB" },
+    editable: "never",
+  },
+
+  {
+    title: "Order Amount ",
+    field: "grossamount",
+    type: "currency",
+    editable: "never",
+  },
+
+  {
+    title: "Status",
+    field: "status",
     editable: "never",
   },
 ];
@@ -321,13 +350,24 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
           <Heading>My Orders History</Heading>
         </Box>
         <Box align="center">
-          <Tabs align="center" isLazy>
+          <Tabs
+            display={{ base: "none", md: "block" }}
+            align="center"
+            isLazy
+            defaultIndex={1}
+          >
             <TabList>
+              <Tab>Profile</Tab>
               <Tab>Confirmed</Tab>
               <Tab>Delivered</Tab>
             </TabList>
-
             <TabPanels>
+              <TabPanel>
+                <Box>
+                  <UserProfile />
+                </Box>
+              </TabPanel>
+
               <TabPanel>
                 <Box w="80%">
                   <MaterialTable
@@ -372,6 +412,106 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
                 <Box w="80%">
                   <MaterialTable
                     columns={others_columns}
+                    data={orders
+                      .filter(
+                        (r) =>
+                          r.email === authuser[0].email &&
+                          r.status === "Delivered"
+                      )
+                      .map((rec) => {
+                        return { ...rec };
+                      })}
+                    title="Orders Tables"
+                    icons={tableIcons}
+                    actions={[
+                      (rowData) => ({
+                        //disabled: rowData.status !== "Pending",
+                        icon: () => <GrFormView size="33px" />,
+                        tooltip: "View Record",
+                        onClick: (event, rowData) => {
+                          handleViewOrder(rowData);
+                        },
+                      }),
+                    ]}
+                    options={{
+                      filtering: false,
+                      search: false,
+                      toolbar: false,
+                      headerStyle: {
+                        backgroundColor: "#9AE6B4",
+                        color: "black",
+                        fontWeight: "bold",
+                      },
+                      showTitle: false,
+                    }}
+                  />
+                </Box>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+
+          <Tabs
+            display={{ base: "block", md: "none" }}
+            align="center"
+            isLazy
+            defaultIndex={1}
+          >
+            <TabList>
+              <Tab>Profile</Tab>
+              <Tab>Confirmed</Tab>
+              <Tab>Delivered</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <Box>
+                  <UserProfile />
+                </Box>
+              </TabPanel>
+
+              <TabPanel>
+                <Box w="80%">
+                  <MaterialTable
+                    columns={mini_columns}
+                    data={orders
+                      .filter(
+                        (r) =>
+                          r.email === authuser[0].email &&
+                          r.status === "Confirmed"
+                      )
+                      .map((rec) => {
+                        return { ...rec };
+                      })}
+                    title="Orders Tables"
+                    icons={tableIcons}
+                    actions={[
+                      (rowData) => ({
+                        //disabled: rowData.status !== "Pending",
+                        icon: () => <GrFormView size="33px" />,
+                        tooltip: "View Record",
+                        onClick: (event, rowData) => {
+                          handleViewOrder(rowData);
+                        },
+                      }),
+                    ]}
+                    options={{
+                      filtering: false,
+                      search: false,
+                      toolbar: false,
+                      headerStyle: {
+                        backgroundColor: "#9AE6B4",
+                        color: "black",
+                        fontWeight: "bold",
+                      },
+                      showTitle: false,
+                    }}
+                  />
+                </Box>
+              </TabPanel>
+
+              <TabPanel>
+                <Box w="80%">
+                  <MaterialTable
+                    columns={mini_columns}
                     data={orders
                       .filter(
                         (r) =>
@@ -476,13 +616,13 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
             <ModalBody>
               {/* <Container maxWidth="container.md" padding={0}> */}
               <Flex
-                h={{ base: "auto", md: "180vh" }}
+                h={{ base: "auto", md: "160vh" }}
                 py={[0, 10, 20]}
                 direction={{ base: "column-reverse", md: "row" }}
               >
                 <Box
                   overflowY={{ base: "scoll", md: "none" }}
-                  //h={{ base: "auto", md: "180vh" }}
+                  h={{ base: "auto", md: "160vh" }}
                 >
                   <OrderEdit
                     order={[...singleorder]}
@@ -511,7 +651,7 @@ const UserOrdersHistory = ({ images = [{ url: "" }] }) => {
                     <Stack
                       spacing="0"
                       w="full"
-                      h={{ base: "130vh", md: "130vh" }}
+                      h={{ base: "auto", md: "130vh" }}
                       direction="row"
                       justifyContent="space-between"
                       //alignItems="center"

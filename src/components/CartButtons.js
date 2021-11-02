@@ -65,6 +65,7 @@ const CartButtons = () => {
   const handleLogOut = () => {
     clearAuthUser();
     history.push("/");
+    window.location.reload();
   };
 
   return (

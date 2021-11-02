@@ -53,7 +53,7 @@ const OrderDetails = ({ orderdetails, orderaddon }) => {
                   <Grid templateColumns="repeat(8, 1fr)">
                     <GridItem colSpan="1">
                       <Box
-                        w="100"
+                        w={{base: "auto", md:"100px"}}
                         p={1}
                         display={{
                           base: "block",

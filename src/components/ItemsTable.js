@@ -262,7 +262,12 @@ const ItemsTable = () => {
           }}
         />
       </VStack>
-      <Modal isOpen={isProductOpen} onClose={onProductClose} size="6xl">
+      <Modal
+        closeOnOverlayClick={false}
+        isOpen={isProductOpen}
+        onClose={onProductClose}
+        size="6xl"
+      >
         <ModalOverlay />
         <ModalContent>
           {/* <ModalHeader>Product Form</ModalHeader> */}
@@ -278,11 +283,11 @@ const ItemsTable = () => {
             />
           </ModalBody>
 
-          <ModalFooter>
+          {/* <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onProductClose}>
               Close
             </Button>
-          </ModalFooter>
+          </ModalFooter> */}
         </ModalContent>
       </Modal>
       <AlertDialogBox
@@ -292,7 +297,8 @@ const ItemsTable = () => {
         title="Delete Product"
       >
         <Heading size="md">
-          Are you sure you want to delete this product {state.itemno} {state.name} ?
+          Are you sure you want to delete this product {state.itemno}{" "}
+          {state.name} ?
         </Heading>
       </AlertDialogBox>
     </Box>

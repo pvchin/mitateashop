@@ -24,6 +24,7 @@ import { useUsers } from "../react-query/users/useUsers";
 import { useUpdateUser } from "../react-query/users/useUpdateUser";
 import { user_localstorage_key } from "../utils/constants";
 import { useAuthUser } from "../react-query/auth/useAuthUser";
+import { useAreas } from "../react-query/area/useAreas";
 
 const initial_values = {
   name: "",
@@ -39,6 +40,7 @@ export default function UserProfile() {
   const field_width = "40";
   const useUser = createLocalStorageStateHook(user_localstorage_key, []);
   const { users, setUserId } = useUsers();
+  const { areas } = useAreas();
   const [state, setState] = useState(initial_values);
   const { authuser } = useAuthUser();
   const updateUser = useUpdateUser();
@@ -236,8 +238,13 @@ export default function UserProfile() {
                           //textTransform="capitalize"
                           ref={ref}
                         >
-                          <option value="Gadong">Gadong</option>
-                          <option value="Kiulap">Kiulap</option>
+                          <option value="">None</option>
+                          {areas &&
+                            areas.map((rec) => {
+                              return (
+                                <option value={rec.name}>{rec.name}</option>
+                              );
+                            })}
                         </Select>
                       </HStack>
                     </InputGroup>

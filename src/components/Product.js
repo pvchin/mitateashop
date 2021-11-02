@@ -34,10 +34,12 @@ const Product = ({
   mprice,
   lprice,
   size,
-  newarrival,
+  isnewarrival,
+  isbestseller,
 }) => {
   const history = useHistory();
   const [orderitem, setOrderItem] = useRecoilState(orderItemState);
+
   const AddToCart = (e) => {
     e.preventDefault();
 
@@ -48,7 +50,6 @@ const Product = ({
       price: price,
       image: image,
       totalprice: price,
-      toppings: [],
       sugarlevel: "50",
       icelevel: "50",
       mprice: mprice,
@@ -78,7 +79,7 @@ const Product = ({
             objectFit="fill"
           />
         </Box>
-        {newarrival && (
+        {isnewarrival && (
           <Heading
             bgColor="whiteAlpha"
             borderRadius="md"
@@ -90,6 +91,20 @@ const Product = ({
             transform="translateY(-600%) translateX(+5%) rotate(-45deg)"
           >
             New!
+          </Heading>
+        )}
+        {isbestseller && (
+          <Heading
+            bgColor="whiteAlpha"
+            borderRadius="md"
+            border="1px solid red"
+            color="red"
+            size="lg"
+            //fontFamily="monospace"
+            position="absolute"
+            transform="translateY(-690%) translateX(-15%) rotate(-45deg)"
+          >
+            Best Seller!
           </Heading>
         )}
         {/* <Heading
