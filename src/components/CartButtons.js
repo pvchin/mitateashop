@@ -59,10 +59,12 @@ const CartButtons = () => {
   }, [authuser]);
 
   const handleSignin = () => {
+    closeSidebar();
     history.push("/signin");
   };
 
   const handleLogOut = () => {
+    closeSidebar();
     clearAuthUser();
     history.push("/");
     window.location.reload();
