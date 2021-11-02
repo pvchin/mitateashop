@@ -17,6 +17,7 @@ import {
   Stack,
   HStack,
   VStack,
+  Text,
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
@@ -88,11 +89,17 @@ export default function UserProfile() {
 
   return (
     <Flex minH="84vh" align="center" justify="center">
-      <Stack spacing={8} mx="auto" w="xl" py={12} px={6}>
+      <Stack
+        spacing={8}
+        mx="auto"
+        w={{ base: "auto", md: "xl" }}
+        py={12}
+        px={{ base: "0", md: "6" }}
+      >
         <Stack align="center">
           <Heading>Your information</Heading>
         </Stack>
-        <Box rounded="lg" bg="white" boxShadow="lg" p={8}>
+        <Box rounded="lg" bg="white" boxShadow="lg" p={{ base: "0", md: "8" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <VStack alignItems="flex-start">
               <FormControl>
@@ -105,11 +112,15 @@ export default function UserProfile() {
                     <InputGroup>
                       <HStack w="100%" py={1}>
                         <InputLeftAddon
+                          fontSize={{ base: "sm", md: "md" }}
                           children="Email"
-                          minWidth={field_width}
+                          minWidth={{ base: "auto", md: field_width }}
                         />
+
                         <Input
                           isReadOnly
+                          p={1}
+                          size={{ base: "sm", md: "md" }}
                           name="email"
                           value={value}
                           onChange={onChange}
@@ -132,10 +143,13 @@ export default function UserProfile() {
                       <HStack w="100%" py={1}>
                         <InputLeftAddon
                           children="Name"
-                          minWidth={field_width}
+                          fontSize={{ base: "sm", md: "md" }}
+                          minWidth={{ base: "auto", md: field_width }}
                         />
                         <Input
                           name="name"
+                          p={1}
+                          size={{ base: "sm", md: "md" }}
                           value={value}
                           onChange={onChange}
                           //textTransform="capitalize"
@@ -157,10 +171,13 @@ export default function UserProfile() {
                       <HStack w="100%" py={1}>
                         <InputLeftAddon
                           children="Phone"
-                          minWidth={field_width}
+                          fontSize={{ base: "sm", md: "md" }}
+                          minWidth={{ base: "auto", md: field_width }}
                         />
                         <Input
                           name="phone"
+                          p={1}
+                          size={{ base: "sm", md: "md" }}
                           value={value}
                           onChange={onChange}
                           //textTransform="capitalize"
@@ -182,11 +199,14 @@ export default function UserProfile() {
                       <HStack w="100%" py={1}>
                         <InputLeftAddon
                           children="Address"
-                          minWidth={field_width}
+                          fontSize={{ base: "sm", md: "md" }}
+                          minWidth={{ base: "auto", md: field_width }}
                         />
                         <Input
                           name="address1"
                           value={value}
+                          p={1}
+                          size={{ base: "sm", md: "md" }}
                           onChange={onChange}
                           //textTransform="capitalize"
                           ref={ref}
@@ -205,10 +225,16 @@ export default function UserProfile() {
                   render={({ field: { onChange, value, ref } }) => (
                     <InputGroup>
                       <HStack w="100%" py={1}>
-                        <InputLeftAddon children="" minWidth={field_width} />
+                        <InputLeftAddon
+                          children="Address"
+                          fontSize={{ base: "sm", md: "md" }}
+                          minWidth={{ base: "auto", md: field_width }}
+                        />
                         <Input
                           name="address2"
                           value={value}
+                          p={1}
+                          size={{ base: "sm", md: "md" }}
                           onChange={onChange}
                           //textTransform="capitalize"
                           ref={ref}
@@ -229,11 +255,14 @@ export default function UserProfile() {
                       <HStack w="100%" py={1}>
                         <InputLeftAddon
                           children="Area"
-                          minWidth={field_width}
+                          fontSize={{ base: "sm", md: "md" }}
+                          minWidth={{ base: "auto", md: field_width }}
                         />
                         <Select
                           name="area"
                           value={value}
+                          p={1}
+                          size={{ base: "sm", md: "md" }}
                           onChange={onChange}
                           //textTransform="capitalize"
                           ref={ref}
