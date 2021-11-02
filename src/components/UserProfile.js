@@ -94,12 +94,12 @@ export default function UserProfile() {
         mx="auto"
         w={{ base: "auto", md: "xl" }}
         py={12}
-        px={{ base: "0", md: "6" }}
+        px={{ base: "1", md: "6" }}
       >
         <Stack align="center">
           <Heading>Your information</Heading>
         </Stack>
-        <Box rounded="lg" bg="white" boxShadow="lg" p={{ base: "0", md: "8" }}>
+        <Box rounded="lg" bg="white" boxShadow="lg" p={{ base: "1", md: "8" }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <VStack alignItems="flex-start">
               <FormControl>
@@ -228,7 +228,7 @@ export default function UserProfile() {
                         <InputLeftAddon
                           children="Address"
                           fontSize={{ base: "sm", md: "md" }}
-                          minWidth={{ base: "auto", md: field_width }}
+                          minWidth={{ base: "none", md: field_width }}
                         />
                         <Input
                           name="address2"
