@@ -76,7 +76,7 @@ const Product = ({
             fallbackSrc="https://via.placeholder.com/150"
             alt={name}
             boxSize="200px"
-            objectFit="fill"
+            objectFit="contain"
           />
         </Box>
         {isnewarrival && (
@@ -99,10 +99,10 @@ const Product = ({
             borderRadius="md"
             border="1px solid red"
             color="red"
-            size="lg"
+            size="md"
             //fontFamily="monospace"
             position="absolute"
-            transform="translateY(-690%) translateX(-15%) rotate(-45deg)"
+            transform="translateY(-990%) translateX(-10%) rotate(-45deg)"
           >
             Best Seller!
           </Heading>
