@@ -18,9 +18,9 @@ function textToBase64Barcode(text) {
   var canvas = document.createElement("canvas");
   JsBarcode(canvas, text, {
     format: "CODE39",
-    fontSize: 18,
-    height: 45,
-    width: 0.6,
+    fontSize: 10,
+    height: 5,
+    width: 1,
   });
   return canvas.toDataURL("image/png");
 }
@@ -84,141 +84,141 @@ const OrderReceipt = () => {
       { qr: greeting, fit: "50" },
       "\n",
       { image: textToBase64Barcode("ENV/SBP/1000ML/A/49/19") },
-      { text: "DSS Environment", style: "header" },
-      // { text: subtitle + "\n", style: "subheader" },
-      // {
-      //   canvas: [
-      //     {
-      //       type: "line",
-      //       x1: 0,
-      //       y1: 5,
-      //       x2: 500,
-      //       y2: 5,
-      //       lineWidth: 2,
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "\n",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: "",
-      //     },
-      //     {
-      //       width: "200",
-      //       text: "",
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Name ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: "200",
-      //       text: orderstate.name,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Phone ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: orderstate.x1phone,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Date ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: orderstate.date,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Delivery Mode ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: orderstate.deliverymode,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Payment Mode ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: orderstate.paymentmode,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // { text: footer + "\n", style: "footer" },
+      { text: "Mita Tea Shop", style: "header" },
+      { text: subtitle + "\n", style: "subheader" },
+      {
+        canvas: [
+          {
+            type: "line",
+            x1: 0,
+            y1: 5,
+            x2: 500,
+            y2: 5,
+            lineWidth: 2,
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "\n",
+          },
+          {
+            width: 20,
+            text: "",
+          },
+          {
+            width: "200",
+            text: "",
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Name ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: "200",
+            text: orderstate.name,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Phone ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: orderstate.x1phone,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Date ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: orderstate.date,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Delivery Mode ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: orderstate.deliverymode,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Payment Mode ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: orderstate.paymentmode,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      { text: footer + "\n", style: "footer" },
     ],
 
     styles: {

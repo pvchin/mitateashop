@@ -8,13 +8,14 @@ import { queryKeys } from "../constants";
 
 async function getOrderItems(id) {
   //const { data } = await axios.get(`${items_url}`);
-  const { data } = await axios.get(`${orderitems_url}?fi=${id}`);
+  //const { data } = await axios.get(`${orderitems_url}?fi=${id}`);
+  const { data } = await axios.get(`${orderitems_url}?al=${id}`);
   return data;
 }
 
 export function useOrderItems() {
   const [filter, setFilter] = useState("all");
-  const [orderitemId, setOrderItemId] = useState("");
+  const [orderitemId, setOrderItemId] = useState("all");
 
   const selectFn = useCallback(
     (unfiltered) => filterById(unfiltered, filter),
@@ -23,7 +24,7 @@ export function useOrderItems() {
 
   const fallback = [];
   const { data: orderitems = fallback } = useQuery(
-    [queryKeys.orderitems,  orderitemId ],
+    [queryKeys.orderitems, orderitemId],
     () => getOrderItems(orderitemId),
     {
       select: filter !== "all" ? selectFn : undefined,

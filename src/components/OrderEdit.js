@@ -103,7 +103,7 @@ const OrderEdit = ({
   const [paytabindex, setPayTabIndex] = useState(1);
   const [isLoad, setIsLoad] = useState(true);
   const todaydate = dayjs().format("YYYY-MM-DD");
-  console.log("current order", currentorder);
+  
   const {
     orderno,
     email,

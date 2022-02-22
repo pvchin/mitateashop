@@ -73,6 +73,7 @@ import { useUpdateDocument } from "../react-query/document/useUpdateDocument";
 import { useCarts } from "../react-query/carts/useCarts";
 import OrderConfirm from "./OrderConfirm";
 import OrderReceipt from "./OrderReceipt";
+import OrderPrintReceipt from "./OrderPrintReceipt";
 
 const initial_order = [
   {
@@ -118,8 +119,9 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
   const [neworderno, setNewOrderNo] = useState("");
   const [isLoad, setIsLoad] = useState(true);
   const todaydate = dayjs().format("YYYY-MM-DD");
-  const exportPdfTable = ({ data }) => {
-    OrderReceipt({ data });
+
+  const exportPdfTable = () => {
+    OrderPrintReceipt();
   };
   const {
     isOpen: isConfirmOrderOpen,
@@ -277,7 +279,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
   }
 
   const onPrintSubmit = (values) => {
-    exportPdfTable({ orderstate: values });
+    exportPdfTable();
   };
 
   const handleAreaChange = (e) => {
@@ -418,7 +420,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                       Continue Shopping
                     </Text>
                   </Button>
-                  {/* <Button
+                  <Button
                     size="lg"
                     w="full"
                     type="button"
@@ -426,7 +428,7 @@ const OrderInfo = ({ order, updateOrders, setDeliveryFee }) => {
                     onClick={handleSubmit((values) => onPrintSubmit(values))}
                   >
                     Print Order
-                  </Button> */}
+                  </Button>
                 </HStack>
               </GridItem>
               <GridItem colSpan={2}>
