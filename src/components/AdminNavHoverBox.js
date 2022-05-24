@@ -17,7 +17,7 @@ export default function AdminNavHoverBox({ title, icon, description }) {
       <Flex
         h={200}
         w={200}
-        w="100%"
+        //w="100%"
         flexDir="column"
         alignItems="center"
         justify="center"

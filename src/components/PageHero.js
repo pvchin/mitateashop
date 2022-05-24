@@ -17,7 +17,8 @@ const PageHero = ({ title, product }) => {
                 /Products
               </Link>
             )}
-            /{title}
+            {title}
+            
           </Heading>
         </HStack>
       </div>
