@@ -27,7 +27,15 @@ const Nav = () => {
           <Link to="/">
             <img src={logo} alt="mita tea shop" />
           </Link>
-          <Link to={{ pathname: 'https://www.star-clicks.com/secure/ads.php?pid=42817033652524660'}} target="_blank" >Star Click</Link>
+          <Link
+            to={{
+              pathname:
+                "https://www.star-clicks.com/secure/ads.php?pid=42817033652524660",
+            }}
+            target="_blank"
+          >
+            Star Click
+          </Link>
           <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars />
           </button>
