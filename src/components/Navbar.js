@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../assets/MitaLogo.jpg";
+import ScriptTag from "react-script-tag";
+import { Helmet } from "react-helmet";
 import { Heading, Text } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -20,6 +22,7 @@ const Nav = () => {
   const { authuser } = useAuthUser();
   const { users } = useUsers();
 
+  
   return (
     <NavContainer>
       <div className="nav-center">
@@ -36,6 +39,7 @@ const Nav = () => {
           >
             Star Click
           </Link>
+       
           <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars />
           </button>
